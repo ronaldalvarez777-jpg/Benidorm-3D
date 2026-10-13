@@ -16,3 +16,4 @@ __pycache__/
 # Entornos virtuales
 .venv/
 venv/
+README.backup.md
