@@ -1,26 +1,30 @@
 # Metodología | Benidorm 3D
 
-## 1. Objetivo
+## 1. Objetivo y alcance
 
-Benidorm 3D es un proyecto de visualización geoespacial tridimensional orientado a la exploración del tejido urbano de Benidorm (Alicante, España).
+Benidorm 3D es un prototipo de visualización geoespacial tridimensional orientado a la exploración del tejido urbano de Benidorm (Alicante, España).
 
-El proyecto combina datos de edificios procedentes del Catastro INSPIRE, procesamiento de datos geoespaciales y tecnologías de cartografía web para facilitar la consulta y representación del entorno construido.
+El proyecto integra datos de edificios procedentes del Catastro INSPIRE, un proceso de preparación y comprobación de información geográfica y una aplicación web interactiva desarrollada con MapLibre GL JS.
 
-## 2. Fuente de datos
+Su finalidad es facilitar la exploración visual de las construcciones y la consulta de los atributos disponibles. No constituye un sistema oficial de información catastral ni una herramienta de certificación urbanística.
 
-La base cartográfica de edificios procede de datos del Catastro INSPIRE.
+**[Abrir el visor web](https://ronaldalvarez777-jpg.github.io/Benidorm-3D/)**
 
-El conjunto utilizado contiene 21.324 objetos cartográficos almacenados en formato GeoJSON. Las geometrías son de tipo MultiPolygon y se mantienen los identificadores y atributos disponibles en los datos de origen.
+## 2. Fuente y estructura de los datos
 
-El número de objetos no debe interpretarse necesariamente como el número de edificios únicos, ya que algunos registros pueden representar partes de edificios.
+La fuente de información de edificios utilizada es el Catastro INSPIRE.
 
-## 3. Preparación de los datos
+El conjunto procesado contiene 21.324 objetos cartográficos almacenados en formato GeoJSON, con geometrías de tipo `MultiPolygon` y atributos asociados.
 
-Los datos se prepararon para su utilización en un visor web basado en MapLibre GL JS.
+Los registros pueden representar edificios completos o partes de edificios. Por tanto, el número de objetos cartográficos no equivale necesariamente al número de edificios únicos.
 
-El conjunto GeoJSON contiene geometrías y atributos que permiten identificar los objetos, consultar información disponible y aplicar filtros temáticos.
+Los identificadores y atributos se conservan para permitir la consulta de los objetos y su trazabilidad dentro del conjunto procesado.
 
-Entre los atributos utilizados se encuentran:
+## 3. Preparación de la información
+
+Los datos se organizan en un archivo GeoJSON para su integración en la aplicación web.
+
+Entre los campos utilizados se encuentran:
 
 - `localId`: identificador local del objeto.
 - `gml_id`: identificador del objeto en los datos de origen.
@@ -28,55 +32,74 @@ Entre los atributos utilizados se encuentran:
 - `numberOfFloorsBelowGround`: número de plantas bajo rasante.
 - `height_m`: altura estimada utilizada para la representación tridimensional.
 
+El GeoJSON reúne las geometrías y los atributos que consume el visor. La documentación describe el conjunto procesado y sus controles; no implica que todos los atributos de origen hayan sido verificados individualmente frente a fuentes externas.
+
 ## 4. Estimación de alturas
 
-Para representar los edificios en tres dimensiones se utiliza una altura estimada calculada a partir del número de plantas sobre rasante:
+Para generar la representación volumétrica se utiliza una altura aproximada basada en el número de plantas sobre rasante:
 
 `height_m = numberOfFloorsAboveGround × 3`
 
-Se aplica una equivalencia de tres metros por planta como aproximación cartográfica.
+Se aplica una equivalencia de tres metros por planta como hipótesis de representación cartográfica.
 
-Este procedimiento permite generar una representación volumétrica homogénea, pero no constituye una medición real de la altura de cada construcción. Los resultados deben interpretarse como una estimación visual.
+Esta regla permite asignar una dimensión vertical a los objetos, pero no representa una medición de la altura real de cada construcción ni una altura oficial proporcionada por el Catastro.
 
-Cuando el número de plantas sobre rasante es cero, la altura calculada también es cero. Estos registros se conservan para no eliminar datos sin una justificación técnica.
+Los registros sin plantas sobre rasante registradas pueden conservar una altura estimada de cero. En consecuencia, la representación visual depende de la disponibilidad y el contenido del atributo de origen.
 
 ## 5. Controles de calidad
 
-Se realizaron comprobaciones sobre la estructura, los atributos y las geometrías del conjunto de datos.
+Se realizaron comprobaciones técnicas sobre la estructura, los identificadores, los atributos seleccionados y las geometrías del conjunto procesado.
 
-Los resultados obtenidos fueron:
+Los resultados documentados son:
 
 - 21.324 objetos examinados.
-- Ningún identificador duplicado detectado en `localId` y `gml_id`.
+- Sin identificadores duplicados detectados en `localId` y `gml_id`.
 - Sin valores ausentes en los campos principales examinados.
-- Coherencia entre la altura calculada y el número de plantas sobre rasante.
-- 21.324 geometrías de tipo MultiPolygon.
+- Coherencia entre `height_m` y el cálculo basado en el número de plantas.
+- 21.324 geometrías de tipo `MultiPolygon`.
 - 21.324 geometrías válidas según la comprobación topológica realizada con Shapely.
-- Sin geometrías vacías o ausentes detectadas.
+- Sin geometrías vacías o ausentes detectadas en la auditoría.
 
-Estas comprobaciones verifican determinadas propiedades técnicas del conjunto, pero no garantizan por sí solas la exactitud de todos los atributos ni la correspondencia con las alturas reales.
+Estos resultados corresponden a las comprobaciones realizadas sobre el conjunto procesado. La validez topológica no demuestra por sí sola que una geometría represente exactamente la construcción real, ni que los atributos sean completos, actuales o administrativamente correctos.
 
-## 6. Visualización web
+## 6. Visualización y consulta web
 
-La aplicación utiliza MapLibre GL JS para mostrar la cartografía interactiva y representar los edificios mediante extrusión tridimensional.
+La aplicación utiliza MapLibre GL JS para representar la cartografía interactiva y mostrar los edificios mediante extrusión tridimensional.
 
-La interfaz incorpora herramientas de consulta y exploración, como búsqueda por identificadores, filtros por altura y número de plantas, estadísticas y controles de visualización.
+Las funcionalidades documentadas incluyen:
 
-El formato GeoJSON facilita la integración de las geometrías y los atributos en el visor.
+- Búsqueda mediante `localId` y `gml_id`.
+- Filtrado por altura estimada y número de plantas sobre rasante.
+- Consulta de atributos disponibles en ventanas emergentes.
+- Estadísticas descriptivas del conjunto.
+- Controles para mostrar u ocultar los edificios.
 
-## 7. Limitaciones
+La geometría y los atributos se integran mediante GeoJSON. La visualización 3D facilita la exploración del entorno construido, pero no sustituye a un modelo tridimensional validado mediante mediciones de altura.
 
-- Las alturas son estimaciones basadas en el número de plantas.
-- Algunos objetos pueden representar partes de edificios.
-- La calidad de los atributos depende de los datos de origen.
-- La validez topológica no implica necesariamente exactitud temática o administrativa.
-- El visor tiene fines de exploración y demostración; no sustituye a los servicios oficiales ni a las herramientas técnicas municipales.
+## 7. Tecnologías utilizadas
 
-## 8. Tecnologías
+- **QGIS:** exploración y trabajo con información geográfica.
+- **Python:** preparación, inspección y comprobación de datos.
+- **Shapely:** comprobación de validez geométrica.
+- **GeoJSON:** formato de intercambio de geometrías y atributos.
+- **MapLibre GL JS:** cartografía web interactiva y representación 3D.
+- **Catastro INSPIRE:** fuente de los datos de edificios utilizados.
 
-- QGIS: exploración y trabajo con información geográfica.
-- Python: inspección y comprobación de datos.
-- Shapely: validación topológica de geometrías.
-- GeoJSON: intercambio de datos espaciales.
-- MapLibre GL JS: cartografía web y representación 3D.
+## 8. Limitaciones
 
+- Las alturas son estimaciones calculadas a partir del número de plantas.
+- Algunos objetos pueden representar partes de edificios y no edificios únicos.
+- La disponibilidad y precisión de los atributos dependen de los datos de origen.
+- Las comprobaciones geométricas no certifican la exactitud temática, métrica o administrativa.
+- El visor tiene fines de exploración y demostración; no sustituye a los servicios oficiales del Catastro ni a las herramientas técnicas municipales.
+
+## 9. Documentación relacionada
+
+- [README del proyecto](../README.md)
+- [Flujo de trabajo SIG](flujo-trabajo.md)
+- [Repositorio en GitHub](https://github.com/ronaldalvarez777-jpg/Benidorm-3D)
+- [Visor publicado](https://ronaldalvarez777-jpg.github.io/Benidorm-3D/)
+
+---
+
+**GeoNOV | Geospatial Intelligence**

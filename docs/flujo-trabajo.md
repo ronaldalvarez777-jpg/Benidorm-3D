@@ -1,60 +1,82 @@
 # Flujo de trabajo SIG | Benidorm 3D
 
-## Visión general
+## 1. Visión general
 
-El proyecto sigue un flujo de trabajo que conecta la adquisición de datos geoespaciales con su preparación, control de calidad y publicación en un visor cartográfico web tridimensional.
+Benidorm 3D integra información geoespacial de edificios, comprobaciones de calidad y cartografía web tridimensional en un prototipo interactivo.
 
-## Fases del proceso
+El flujo documentado conecta la fuente de datos con su preparación, la estimación de alturas, la validación técnica, el desarrollo del visor y su publicación.
 
-### 1. Obtención de datos
+## 2. Fases del proceso
 
-**Entrada:** datos de edificios del Catastro INSPIRE.
+### Fase 1. Obtención de datos
 
-Se utilizan los identificadores, atributos y geometrías disponibles en los datos de origen.
+**Fuente:** Catastro INSPIRE.
 
-### 2. Preparación de la información
+Se parte de datos de edificios que incluyen geometrías, identificadores y atributos disponibles en origen. Los objetos pueden representar edificios completos o partes de edificios.
 
-**Proceso:** transformación y organización de los datos para su uso en la aplicación.
+### Fase 2. Preparación de la información
 
-El conjunto de edificios se integra en un archivo GeoJSON que contiene las geometrías y los atributos necesarios para la consulta y visualización.
+**Formato de trabajo web:** GeoJSON.
 
-### 3. Generación de alturas estimadas
+Los datos se organizan en un conjunto de geometrías y atributos compatible con la aplicación. El resultado permite identificar los objetos y consultar los campos seleccionados desde el visor.
 
-**Proceso:** cálculo de una altura aproximada a partir del número de plantas sobre rasante.
+### Fase 3. Cálculo de alturas estimadas
+
+**Atributo generado:** `height_m`.
+
+La altura para la representación 3D se calcula mediante la regla:
 
 `height_m = numberOfFloorsAboveGround × 3`
 
-La equivalencia de tres metros por planta es una hipótesis de representación, no una medición oficial.
+La equivalencia de tres metros por planta es una hipótesis de representación cartográfica. No es una medición de la altura real ni una validación oficial de cada edificio.
 
-### 4. Control de calidad
+### Fase 4. Control de calidad
 
-**Herramientas:** Python y Shapely.
+**Herramientas documentadas:** Python y Shapely.
 
-Se comprueban, entre otros aspectos:
+Se comprueban propiedades técnicas del conjunto procesado, entre ellas:
 
 - Presencia de geometrías y atributos principales.
 - Duplicidad de identificadores.
-- Coherencia entre plantas y altura estimada.
-- Tipo y validez topológica de las geometrías.
+- Coherencia entre el número de plantas y la altura estimada.
+- Tipo de geometría.
+- Validez topológica y ausencia de geometrías vacías.
 
-### 5. Desarrollo del visor
+Los controles realizados permiten detectar determinados problemas de estructura y geometría, pero no certifican la exactitud de todos los atributos ni la correspondencia con la realidad.
 
-**Tecnología:** MapLibre GL JS.
+### Fase 5. Desarrollo del visor web
 
-El GeoJSON se integra en la aplicación web para representar los edificios mediante extrusión 3D y permitir la exploración interactiva de sus atributos.
+**Tecnología principal:** MapLibre GL JS.
 
-### 6. Consulta y análisis exploratorio
+El conjunto GeoJSON se integra en una aplicación web que permite visualizar las construcciones mediante extrusión 3D y explorar sus atributos.
 
-El usuario puede buscar objetos por identificador, filtrar edificios por altura o número de plantas y consultar estadísticas y atributos disponibles.
+Entre las herramientas disponibles se encuentran la búsqueda por identificadores, los filtros por altura y número de plantas, las estadísticas descriptivas y los controles de visualización.
 
-### 7. Revisión y mejora
+### Fase 6. Publicación
 
-El proyecto queda abierto a futuras mejoras, como incorporar modelos digitales del terreno, enriquecer los atributos, optimizar el rendimiento y ampliar las herramientas de análisis espacial.
+**Plataforma:** GitHub y GitHub Pages.
 
-## Resumen del flujo
+El proyecto se mantiene en un repositorio Git para gestionar los cambios del código y la documentación. La versión web se publica mediante GitHub Pages a partir del directorio configurado para el sitio.
 
-**Catastro INSPIRE → Preparación de datos → GeoJSON → Control de calidad → MapLibre GL JS → Visor urbano 3D**
+- [Repositorio del proyecto](https://github.com/ronaldalvarez777-jpg/Benidorm-3D)
+- [Visor web publicado](https://ronaldalvarez777-jpg.github.io/Benidorm-3D/)
 
-## Alcance
+### Fase 7. Exploración y mejoras futuras
 
-Este flujo documenta el proceso de desarrollo del prototipo. No implica que se hayan realizado análisis de terreno, cálculos de alturas reales ni validaciones oficiales que no estén descritos expresamente en la documentación.
+El visor permite explorar la distribución de los objetos, consultar sus atributos y aplicar filtros temáticos.
+
+Como posibles líneas de evolución se plantean la optimización del rendimiento, el enriquecimiento de atributos, la incorporación de modelos digitales del terreno y el desarrollo de nuevas herramientas de análisis espacial. Estas mejoras son propuestas futuras, no funcionalidades que se den por implementadas.
+
+## 3. Resumen del flujo
+
+**Catastro INSPIRE → Preparación de datos → GeoJSON → Estimación de alturas → Control de calidad → MapLibre GL JS → GitHub Pages → Exploración web**
+
+## 4. Alcance y reproducibilidad
+
+Este documento describe las etapas generales del prototipo y las comprobaciones documentadas. No presupone que se hayan realizado procesos adicionales que no consten en el proyecto.
+
+La reproducción exacta del proceso depende de disponer de los datos de entrada, los archivos de preparación y las herramientas utilizadas. La publicación del visor facilita la consulta de la aplicación, mientras que el repositorio permite inspeccionar el código y la documentación.
+
+---
+
+**GeoNOV | Geospatial Intelligence**

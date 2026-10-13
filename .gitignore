@@ -17,3 +17,5 @@ __pycache__/
 .venv/
 venv/
 README.backup.md
+docs/metodologia.backup.md
+docs/flujo-trabajo.backup.md
