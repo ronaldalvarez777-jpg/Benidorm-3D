@@ -1,0 +1,1645 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0e14">
+
+  <title>Benidorm 3D | GeoNOV Spatial Intelligence</title>
+
+  <link
+    href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css"
+    rel="stylesheet"
+  >
+
+  <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --background: #0a0e14;
+      --panel: #111722;
+      --panel-light: #182231;
+      --border: #263345;
+      --text: #edf3fa;
+      --muted: #93a3b7;
+      --accent: #38bdf8;
+      --green: #34d399;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--background);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button,
+    select {
+      cursor: pointer;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 350px minmax(0, 1fr);
+      width: 100%;
+      height: 100%;
+    }
+
+    .sidebar {
+      position: relative;
+      z-index: 2;
+      overflow-y: auto;
+      padding: 22px 22px 30px;
+      background: var(--background);
+      border-right: 1px solid var(--border);
+    }
+
+    /* Identidad visual GeoNOV */
+
+    .brand-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      color: var(--accent);
+      background: linear-gradient(145deg, #142c40, #0d1724);
+      border: 1px solid #28516b;
+      border-radius: 11px;
+      box-shadow: 0 0 18px #38bdf81a;
+    }
+
+    .brand-mark svg {
+      display: block;
+      width: 34px;
+      height: 34px;
+    }
+
+    .brand-name {
+      color: var(--text);
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1.2;
+    }
+
+    .brand-name span {
+      color: var(--accent);
+    }
+
+    .brand-tagline {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .project-heading {
+      margin-bottom: 10px;
+    }
+
+    .eyebrow {
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 27px;
+      font-weight: 750;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      margin: 10px 0 17px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .location-tag {
+      display: inline-block;
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: #cbd8e8;
+      font-size: 11px;
+    }
+
+    .section-title {
+      margin: 27px 0 13px;
+      color: #dfe8f3;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .search-control,
+    .control-card {
+      margin-bottom: 12px;
+      padding: 13px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+    }
+
+    .search-label {
+      display: block;
+      margin-bottom: 9px;
+      color: #a9bad0;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .search-form {
+      display: flex;
+      gap: 7px;
+    }
+
+    input[type="search"],
+    .filter-select {
+      width: 100%;
+      min-width: 0;
+      padding: 11px 10px;
+      color: var(--text);
+      background: #0a1019;
+      border: 1px solid #304055;
+      border-radius: 6px;
+      outline: none;
+      font-size: 12px;
+    }
+
+    input:focus,
+    .filter-select:focus {
+      border-color: var(--accent);
+    }
+
+    .primary-button,
+    .style-button {
+      padding: 10px 12px;
+      color: #eaf6ff;
+      background: #17374b;
+      border: 1px solid #28566f;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 750;
+      transition: background 0.2s ease;
+    }
+
+    .primary-button:hover,
+    .style-button:hover {
+      background: #20506b;
+    }
+
+    .search-form .primary-button {
+      flex-shrink: 0;
+    }
+
+    .search-message {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .search-results {
+      display: grid;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .result-button {
+      padding: 10px;
+      text-align: left;
+      color: var(--text);
+      background: #172130;
+      border: 1px solid #2a3b50;
+      border-radius: 6px;
+      overflow-wrap: anywhere;
+    }
+
+    .result-button:hover {
+      border-color: var(--accent);
+    }
+
+    .result-id {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .result-detail {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .filter-select {
+      margin-bottom: 15px;
+    }
+
+    #reset-filters {
+      width: 100%;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+
+    .stat-card {
+      min-width: 0;
+      padding: 13px 11px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .stat-label {
+      min-height: 28px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    .stat-value {
+      margin-top: 8px;
+      font-size: 23px;
+      font-weight: 750;
+      letter-spacing: -0.7px;
+      overflow-wrap: anywhere;
+    }
+
+    .stat-unit {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .layer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 13px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .layer-name {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .layer-description {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
+    }
+
+    .style-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .style-button.active {
+      color: #fff;
+      background: #17445a;
+      border-color: var(--accent);
+    }
+
+    .legend {
+      margin-top: 13px;
+      padding: 13px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .legend-title {
+      margin-bottom: 12px;
+      color: #dbe7f4;
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 9px 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .legend-swatch {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+      border-radius: 3px;
+    }
+
+    .method-note {
+      margin-top: 12px;
+      color: #8191a6;
+      font-size: 10px;
+      line-height: 1.65;
+    }
+
+    .map-area {
+      position: relative;
+      min-width: 0;
+      min-height: 0;
+      background: #111722;
+    }
+
+    #map {
+      position: absolute;
+      inset: 0;
+    }
+
+    .map-status {
+      position: absolute;
+      z-index: 1;
+      top: 17px;
+      right: 17px;
+      max-width: calc(100% - 34px);
+      padding: 10px 13px;
+      color: #e6f1fc;
+      background: rgba(10, 14, 20, 0.91);
+      border: 1px solid #344458;
+      border-radius: 7px;
+      font-size: 11px;
+      backdrop-filter: blur(12px);
+    }
+
+    .map-status::before {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .maplibregl-popup-content {
+      max-width: 330px;
+      padding: 0;
+      overflow: hidden;
+      color: var(--text);
+      background: #111722;
+      border: 1px solid #304055;
+      border-radius: 10px;
+      box-shadow: 0 15px 45px #0008;
+    }
+
+    .maplibregl-popup-close-button {
+      top: 7px;
+      right: 8px;
+      color: #fff;
+      font-size: 19px;
+    }
+
+    .maplibregl-popup-tip {
+      border-top-color: #111722 !important;
+      border-bottom-color: #111722 !important;
+    }
+
+    .popup-content {
+      padding: 17px;
+    }
+
+    .popup-eyebrow {
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+    }
+
+    .popup-title {
+      margin: 0 22px 12px 0;
+      font-size: 15px;
+      overflow-wrap: anywhere;
+    }
+
+    .popup-highlight {
+      margin-bottom: 13px;
+      padding: 11px;
+      background: #192637;
+      border-radius: 7px;
+    }
+
+    .popup-highlight-label {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .popup-highlight-value {
+      margin-top: 5px;
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+    .popup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .popup-field {
+      min-width: 0;
+      padding-top: 9px;
+      border-top: 1px solid #283648;
+    }
+
+    .popup-field-label {
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .popup-field-value {
+      font-size: 11px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .popup-note {
+      margin-top: 13px;
+      color: #92a3b8;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 760px) {
+      .app {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(0, 48%) minmax(0, 52%);
+      }
+
+      .sidebar {
+        padding: 17px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      h1 {
+        font-size: 23px;
+      }
+
+      .brand-header {
+        margin-bottom: 17px;
+      }
+
+      .section-title {
+        margin-top: 20px;
+      }
+
+      .map-status {
+        top: 10px;
+        right: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar">
+
+      <!-- Marca GeoNOV -->
+      <div class="brand-header">
+        <div class="brand-mark" aria-hidden="true">
+          <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M24 3 43 14 24 25 5 14 24 3Z"
+              stroke="currentColor"
+              stroke-width="3.5"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M5 23 24 34 43 23"
+              stroke="currentColor"
+              stroke-width="3.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M5 32 24 43 43 32"
+              stroke="currentColor"
+              stroke-width="3.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+
+        <div>
+          <div class="brand-name">Geo<span>NOV</span></div>
+          <div class="brand-tagline">Spatial Intelligence</div>
+        </div>
+      </div>
+
+      <div class="project-heading">
+        <div class="eyebrow">Urban Intelligence</div>
+        <h1>Benidorm 3D</h1>
+      </div>
+
+      <p class="subtitle">
+        Visualización tridimensional y análisis del entorno urbano.
+      </p>
+
+      <div class="location-tag">Benidorm · Alicante, España</div>
+
+      <div class="section-title">Buscar edificio</div>
+
+      <div class="search-control">
+        <label class="search-label" for="building-search">
+          IDENTIFICADOR CATASTRAL
+        </label>
+
+        <form id="building-search-form" class="search-form">
+          <input
+            id="building-search"
+            type="search"
+            placeholder="Introduce localId o gml_id..."
+            autocomplete="off"
+            aria-label="Identificador del edificio"
+          >
+
+          <button class="primary-button" type="submit">
+            Buscar
+          </button>
+        </form>
+
+        <div id="search-message" class="search-message" role="status">
+          Introduce un identificador completo o una parte del mismo.
+        </div>
+
+        <div id="search-results" class="search-results"></div>
+      </div>
+
+      <div class="section-title">Filtros de edificios</div>
+
+      <div class="search-control">
+        <label class="search-label" for="height-filter">
+          ALTURA MÍNIMA ESTIMADA
+        </label>
+
+        <select id="height-filter" class="filter-select">
+          <option value="0">Todas las alturas</option>
+          <option value="15">15 metros o más</option>
+          <option value="30">30 metros o más</option>
+          <option value="45">45 metros o más</option>
+          <option value="60">60 metros o más</option>
+        </select>
+
+        <label class="search-label" for="floors-filter">
+          PLANTAS MÍNIMAS SOBRE RASANTE
+        </label>
+
+        <select id="floors-filter" class="filter-select">
+          <option value="0">Todas las plantas</option>
+          <option value="5">5 plantas o más</option>
+          <option value="10">10 plantas o más</option>
+          <option value="15">15 plantas o más</option>
+          <option value="20">20 plantas o más</option>
+        </select>
+
+        <button
+          id="reset-filters"
+          class="primary-button"
+          type="button"
+        >
+          Restablecer filtros
+        </button>
+
+        <div id="filter-message" class="search-message" role="status">
+          Todos los edificios están visibles.
+        </div>
+      </div>
+
+      <div class="section-title">Indicadores urbanos</div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Objetos cartográficos</div>
+          <div id="stat-count" class="stat-value">—</div>
+          <div class="stat-unit">Elementos cargados</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Plantas medias</div>
+          <div id="stat-floors" class="stat-value">—</div>
+          <div class="stat-unit">Sobre rasante</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Altura media estimada</div>
+          <div id="stat-height" class="stat-value">—</div>
+          <div class="stat-unit">Metros</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Objetos visibles</div>
+          <div id="stat-visible" class="stat-value">—</div>
+          <div class="stat-unit">Tras aplicar filtros</div>
+        </div>
+      </div>
+
+      <div class="section-title">Capas cartográficas</div>
+
+      <div class="layer-row">
+        <div>
+          <div class="layer-name">Edificios 3D</div>
+          <div class="layer-description">
+            Mostrar u ocultar construcciones
+          </div>
+        </div>
+
+        <input
+          id="buildings-toggle"
+          type="checkbox"
+          checked
+          aria-label="Mostrar u ocultar edificios 3D"
+        >
+      </div>
+
+      <div class="section-title">Visualización</div>
+
+      <div class="style-buttons">
+        <button
+          id="thermal-mode"
+          class="style-button active"
+          type="button"
+          aria-pressed="true"
+        >
+          Altura estimada
+        </button>
+
+        <button
+          id="architectural-mode"
+          class="style-button"
+          type="button"
+          aria-pressed="false"
+        >
+          Arquitectónica
+        </button>
+      </div>
+
+      <div id="height-legend" class="legend">
+        <div class="legend-title">Rangos de altura estimada</div>
+
+        <div class="legend-item">
+          <span class="legend-swatch" style="background:#38bdf8"></span>
+          Menos de 15 m
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-swatch" style="background:#34d399"></span>
+          15–29,9 m
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-swatch" style="background:#facc15"></span>
+          30–44,9 m
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-swatch" style="background:#fb923c"></span>
+          45–59,9 m
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-swatch" style="background:#f87171"></span>
+          60 m o más
+        </div>
+      </div>
+
+      <p class="method-note">
+        <strong>Metodología:</strong> la altura se estima multiplicando
+        el número de plantas sobre rasante por 3 metros. Es una
+        aproximación, no una medición directa de la altura real.
+        Los objetos cartográficos pueden incluir partes de edificios
+        y no equivalen necesariamente a edificios únicos.
+      </p>
+    </aside>
+
+    <main class="map-area">
+      <div id="map" aria-label="Mapa tridimensional de Benidorm"></div>
+
+      <div id="map-status" class="map-status">
+        Inicializando mapa...
+      </div>
+    </main>
+  </div>
+
+  <script>
+    "use strict";
+
+    const DATA_URL = "./benidorm_buildings.geojson";
+
+    const state = {
+      features: [],
+      style: "thermal",
+      buildingsVisible: true,
+      selectedFeature: null,
+      popup: null,
+      dataLoaded: false
+    };
+
+    const elements = {
+      searchForm: document.getElementById("building-search-form"),
+      searchInput: document.getElementById("building-search"),
+      searchMessage: document.getElementById("search-message"),
+      searchResults: document.getElementById("search-results"),
+      heightFilter: document.getElementById("height-filter"),
+      floorsFilter: document.getElementById("floors-filter"),
+      resetFilters: document.getElementById("reset-filters"),
+      filterMessage: document.getElementById("filter-message"),
+      buildingsToggle: document.getElementById("buildings-toggle"),
+      thermalMode: document.getElementById("thermal-mode"),
+      architecturalMode: document.getElementById("architectural-mode"),
+      heightLegend: document.getElementById("height-legend"),
+      statCount: document.getElementById("stat-count"),
+      statFloors: document.getElementById("stat-floors"),
+      statHeight: document.getElementById("stat-height"),
+      statVisible: document.getElementById("stat-visible"),
+      mapStatus: document.getElementById("map-status")
+    };
+
+    const map = new maplibregl.Map({
+      container: "map",
+      style: "https://tiles.openfreemap.org/styles/dark",
+      center: [-0.122, 38.541],
+      zoom: 14,
+      pitch: 60,
+      bearing: -15,
+      maxPitch: 80,
+      antialias: true
+    });
+
+    map.addControl(
+      new maplibregl.NavigationControl({
+        visualizePitch: true
+      }),
+      "top-right"
+    );
+
+    map.addControl(
+      new maplibregl.ScaleControl({
+        maxWidth: 120,
+        unit: "metric"
+      }),
+      "bottom-right"
+    );
+
+    function escapeHTML(value) {
+      return String(value ?? "No disponible").replace(
+        /[&<>"']/g,
+        character => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        })[character]
+      );
+    }
+
+    function getProperty(properties, names) {
+      for (const name of names) {
+        if (
+          properties &&
+          properties[name] !== undefined &&
+          properties[name] !== null &&
+          properties[name] !== ""
+        ) {
+          return properties[name];
+        }
+      }
+
+      return null;
+    }
+
+    function getFloors(properties) {
+      const value = Number(
+        getProperty(properties, [
+          "numberOfFloorsAboveGround",
+          "numberoffloorsaboveground",
+          "number_of_floors_above_ground"
+        ])
+      );
+
+      return Number.isFinite(value) ? value : 0;
+    }
+
+    function getHeight(properties) {
+      const directHeight = getProperty(properties, [
+        "height_m",
+        "height",
+        "estimated_height"
+      ]);
+
+      if (
+        directHeight !== null &&
+        Number.isFinite(Number(directHeight))
+      ) {
+        return Number(directHeight);
+      }
+
+      return getFloors(properties) * 3;
+    }
+
+    function formatNumber(value, decimals = 1) {
+      if (!Number.isFinite(value)) {
+        return "—";
+      }
+
+      return value.toLocaleString("es-ES", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: decimals
+      });
+    }
+
+    function formatText(value) {
+      return value === null || value === undefined || value === ""
+        ? "No disponible"
+        : String(value);
+    }
+
+    function getIdentifier(properties) {
+      return getProperty(properties, [
+        "localId",
+        "localid",
+        "gml_id",
+        "gmlId",
+        "gmlid"
+      ]) || "Identificador no disponible";
+    }
+
+    function getGmlId(properties) {
+      return getProperty(properties, [
+        "gml_id",
+        "gmlId",
+        "gmlid"
+      ]);
+    }
+
+    function getLocalId(properties) {
+      return getProperty(properties, [
+        "localId",
+        "localid"
+      ]);
+    }
+
+    function setStatus(message) {
+      elements.mapStatus.textContent = message;
+    }
+
+    function getThermalColorExpression() {
+      return [
+        "step",
+        ["to-number", ["get", "height_m"], 0],
+        "#38BDF8",
+        15, "#34D399",
+        30, "#FACC15",
+        45, "#FB923C",
+        60, "#F87171"
+      ];
+    }
+
+    function getFilterExpression() {
+      const minHeight = Number(elements.heightFilter.value);
+      const minFloors = Number(elements.floorsFilter.value);
+
+      return [
+        "all",
+        [
+          ">=",
+          ["to-number", ["get", "height_m"], 0],
+          minHeight
+        ],
+        [
+          ">=",
+          [
+            "to-number",
+            ["get", "numberOfFloorsAboveGround"],
+            0
+          ],
+          minFloors
+        ]
+      ];
+    }
+
+    function addBuildingsLayer(data) {
+      if (map.getLayer("benidorm-buildings-3d")) {
+        map.removeLayer("benidorm-buildings-3d");
+      }
+
+      if (map.getSource("benidorm-buildings")) {
+        map.removeSource("benidorm-buildings");
+      }
+
+      map.addSource("benidorm-buildings", {
+        type: "geojson",
+        data,
+        promoteId: "fid"
+      });
+
+      map.addLayer({
+        id: "benidorm-buildings-3d",
+        type: "fill-extrusion",
+        source: "benidorm-buildings",
+        filter: getFilterExpression(),
+        paint: {
+          "fill-extrusion-color": getThermalColorExpression(),
+          "fill-extrusion-height": [
+            "max",
+            3,
+            ["to-number", ["get", "height_m"], 3]
+          ],
+          "fill-extrusion-base": 0,
+          "fill-extrusion-opacity": 0.92,
+          "fill-extrusion-vertical-gradient": true
+        }
+      });
+
+      map.setLayoutProperty(
+        "benidorm-buildings-3d",
+        "visibility",
+        state.buildingsVisible ? "visible" : "none"
+      );
+    }
+
+    function setBuildingStyle(style) {
+      state.style = style;
+
+      const thermal = style === "thermal";
+
+      if (map.getLayer("benidorm-buildings-3d")) {
+        map.setPaintProperty(
+          "benidorm-buildings-3d",
+          "fill-extrusion-color",
+          thermal ? getThermalColorExpression() : "#648fb5"
+        );
+      }
+
+      elements.thermalMode.classList.toggle("active", thermal);
+      elements.architecturalMode.classList.toggle("active", !thermal);
+
+      elements.thermalMode.setAttribute(
+        "aria-pressed",
+        String(thermal)
+      );
+
+      elements.architecturalMode.setAttribute(
+        "aria-pressed",
+        String(!thermal)
+      );
+
+      elements.heightLegend.style.display = thermal ? "block" : "none";
+
+      setStatus(
+        thermal
+          ? "Visualización por altura estimada"
+          : "Visualización arquitectónica"
+      );
+    }
+
+    function updateStatistics() {
+      const features = state.features;
+
+      const floors = features
+        .map(feature => getFloors(feature.properties))
+        .filter(Number.isFinite);
+
+      const heights = features
+        .map(feature => getHeight(feature.properties))
+        .filter(Number.isFinite);
+
+      const mean = values => values.length
+        ? values.reduce((sum, value) => sum + value, 0) / values.length
+        : 0;
+
+      elements.statCount.textContent =
+        formatNumber(features.length, 0);
+
+      elements.statFloors.textContent =
+        formatNumber(mean(floors));
+
+      elements.statHeight.textContent =
+        formatNumber(mean(heights));
+
+      updateVisibleCount();
+    }
+
+    function updateVisibleCount() {
+      if (!state.dataLoaded) {
+        elements.statVisible.textContent = "—";
+        return;
+      }
+
+      const minHeight = Number(elements.heightFilter.value);
+      const minFloors = Number(elements.floorsFilter.value);
+
+      const visibleFeatures = state.features.filter(feature => {
+        const properties = feature.properties || {};
+
+        return (
+          getHeight(properties) >= minHeight &&
+          getFloors(properties) >= minFloors
+        );
+      });
+
+      elements.statVisible.textContent =
+        formatNumber(visibleFeatures.length, 0);
+
+      elements.filterMessage.textContent =
+        `${formatNumber(visibleFeatures.length, 0)} de ` +
+        `${formatNumber(state.features.length, 0)} objetos cumplen los filtros.`;
+    }
+
+    function applyFilters() {
+      if (!state.dataLoaded) {
+        return;
+      }
+
+      if (map.getLayer("benidorm-buildings-3d")) {
+        map.setFilter(
+          "benidorm-buildings-3d",
+          getFilterExpression()
+        );
+      }
+
+      updateVisibleCount();
+
+      if (state.popup) {
+        state.popup.remove();
+        state.popup = null;
+      }
+
+      setStatus("Filtros urbanos actualizados");
+    }
+
+    function getPopupHTML(feature) {
+      const properties = feature.properties || {};
+
+      const height = getHeight(properties);
+      const floors = getFloors(properties);
+
+      const floorsBelow = getProperty(properties, [
+        "numberOfFloorsBelowGround",
+        "numberoffloorsbelowground",
+        "number_of_floors_below_ground"
+      ]);
+
+      const accuracy = getProperty(properties, [
+        "horizontalGeometryEstimatedAccuracy",
+        "horizontalgeometryestimatedaccuracy",
+        "horizontal_geometry_estimated_accuracy"
+      ]);
+
+      const reference = getProperty(properties, [
+        "horizontalGeometryReference",
+        "horizontalgeometryreference",
+        "horizontal_geometry_reference"
+      ]);
+
+      const condition = getProperty(properties, [
+        "conditionOfConstruction",
+        "conditionofconstruction",
+        "condition_of_construction"
+      ]);
+
+      const localId = getLocalId(properties);
+      const gmlId = getGmlId(properties);
+
+      return `
+        <div class="popup-content">
+          <div class="popup-eyebrow">CATASTRO INSPIRE</div>
+
+          <h3 class="popup-title">Ficha del edificio</h3>
+
+          <div class="popup-highlight">
+            <div class="popup-highlight-label">
+              Altura estimada
+            </div>
+
+            <div class="popup-highlight-value">
+              ${escapeHTML(formatNumber(height))} m
+            </div>
+          </div>
+
+          <div class="popup-grid">
+            <div class="popup-field">
+              <div class="popup-field-label">
+                Plantas sobre rasante
+              </div>
+              <div class="popup-field-value">
+                ${escapeHTML(formatText(floors))}
+              </div>
+            </div>
+
+            <div class="popup-field">
+              <div class="popup-field-label">
+                Plantas bajo rasante
+              </div>
+              <div class="popup-field-value">
+                ${escapeHTML(formatText(floorsBelow))}
+              </div>
+            </div>
+
+            <div class="popup-field">
+              <div class="popup-field-label">
+                Precisión horizontal declarada
+              </div>
+              <div class="popup-field-value">
+                ${escapeHTML(formatText(accuracy))}
+                ${accuracy !== null ? " m" : ""}
+              </div>
+            </div>
+
+            <div class="popup-field">
+              <div class="popup-field-label">
+                Referencia geométrica
+              </div>
+              <div class="popup-field-value">
+                ${escapeHTML(formatText(reference))}
+              </div>
+            </div>
+
+            <div class="popup-field">
+              <div class="popup-field-label">
+                Estado de construcción
+              </div>
+              <div class="popup-field-value">
+                ${escapeHTML(formatText(condition))}
+              </div>
+            </div>
+
+            <div class="popup-field">
+              <div class="popup-field-label">
+                localId
+              </div>
+              <div class="popup-field-value">
+                ${escapeHTML(formatText(localId))}
+              </div>
+            </div>
+
+            <div class="popup-field" style="grid-column:1 / -1">
+              <div class="popup-field-label">
+                gml_id
+              </div>
+              <div class="popup-field-value">
+                ${escapeHTML(formatText(gmlId))}
+              </div>
+            </div>
+          </div>
+
+          <div class="popup-note">
+            La altura se estima multiplicando las plantas sobre
+            rasante por 3 m. La precisión horizontal declarada
+            corresponde a la geometría horizontal, no a la altura.
+          </div>
+        </div>
+      `;
+    }
+
+    function getCoordinates(feature) {
+      const geometry = feature.geometry;
+
+      if (!geometry || !geometry.coordinates) {
+        return null;
+      }
+
+      const coordinates = [];
+
+      function collectCoordinates(value) {
+        if (
+          Array.isArray(value) &&
+          value.length >= 2 &&
+          typeof value[0] === "number" &&
+          typeof value[1] === "number"
+        ) {
+          coordinates.push(value);
+          return;
+        }
+
+        if (Array.isArray(value)) {
+          value.forEach(collectCoordinates);
+        }
+      }
+
+      collectCoordinates(geometry.coordinates);
+
+      return coordinates.length ? coordinates : null;
+    }
+
+    function getFeatureCenter(feature) {
+      const coordinates = getCoordinates(feature);
+
+      if (!coordinates) {
+        return null;
+      }
+
+      const bounds = new maplibregl.LngLatBounds();
+
+      coordinates.forEach(coordinate => {
+        bounds.extend([coordinate[0], coordinate[1]]);
+      });
+
+      return {
+        center: bounds.getCenter(),
+        bounds
+      };
+    }
+
+    function showBuilding(feature, zoomToFeature = true) {
+      if (!feature || !feature.geometry) {
+        return;
+      }
+
+      state.selectedFeature = feature;
+
+      const location = getFeatureCenter(feature);
+
+      if (!location) {
+        elements.searchMessage.textContent =
+          "No se han podido obtener las coordenadas del elemento.";
+        return;
+      }
+
+      if (!state.buildingsVisible) {
+        state.buildingsVisible = true;
+        elements.buildingsToggle.checked = true;
+
+        if (map.getLayer("benidorm-buildings-3d")) {
+          map.setLayoutProperty(
+            "benidorm-buildings-3d",
+            "visibility",
+            "visible"
+          );
+        }
+      }
+
+      if (zoomToFeature) {
+        const bounds = location.bounds;
+        const span = Math.max(
+          Math.abs(bounds.getEast() - bounds.getWest()),
+          Math.abs(bounds.getNorth() - bounds.getSouth())
+        );
+
+        if (span > 0.0008) {
+          map.fitBounds(bounds, {
+            padding: 100,
+            maxZoom: 18,
+            duration: 1000,
+            pitch: 60
+          });
+        } else {
+          map.flyTo({
+            center: location.center,
+            zoom: 18,
+            pitch: 60,
+            duration: 1000
+          });
+        }
+      }
+
+      if (state.popup) {
+        state.popup.remove();
+      }
+
+      state.popup = new maplibregl.Popup({
+        closeButton: true,
+        closeOnClick: false,
+        maxWidth: "340px",
+        offset: 12
+      })
+        .setLngLat(location.center)
+        .setHTML(getPopupHTML(feature))
+        .addTo(map);
+
+      setStatus("Edificio seleccionado");
+    }
+
+    function findMatches(query) {
+      const normalizedQuery = query.trim().toLowerCase();
+
+      if (!normalizedQuery) {
+        return [];
+      }
+
+      return state.features.filter(feature => {
+        const properties = feature.properties || {};
+
+        const localId = String(
+          getLocalId(properties) || ""
+        ).toLowerCase();
+
+        const gmlId = String(
+          getGmlId(properties) || ""
+        ).toLowerCase();
+
+        return (
+          localId.includes(normalizedQuery) ||
+          gmlId.includes(normalizedQuery)
+        );
+      });
+    }
+
+    function renderSearchResults(matches) {
+      elements.searchResults.replaceChildren();
+
+      const shown = matches.slice(0, 8);
+
+      shown.forEach(feature => {
+        const properties = feature.properties || {};
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "result-button";
+
+        const identifier = document.createElement("span");
+        identifier.className = "result-id";
+        identifier.textContent = getIdentifier(properties);
+
+        const detail = document.createElement("span");
+        detail.className = "result-detail";
+        detail.textContent =
+          `${formatNumber(getHeight(properties))} m estimados · ` +
+          `${formatNumber(getFloors(properties), 0)} plantas`;
+
+        button.append(identifier, detail);
+
+        button.addEventListener("click", () => {
+          showBuilding(feature, true);
+          elements.searchMessage.textContent =
+            "Edificio localizado correctamente.";
+        });
+
+        elements.searchResults.appendChild(button);
+      });
+    }
+
+    elements.searchForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const query = elements.searchInput.value.trim();
+
+      elements.searchResults.replaceChildren();
+
+      if (!query) {
+        elements.searchMessage.textContent =
+          "Introduce un identificador para realizar la búsqueda.";
+        return;
+      }
+
+      if (!state.dataLoaded) {
+        elements.searchMessage.textContent =
+          "Los datos todavía se están cargando. Inténtalo de nuevo.";
+        return;
+      }
+
+      const matches = findMatches(query);
+
+      if (matches.length === 0) {
+        elements.searchMessage.textContent =
+          "No se han encontrado coincidencias. Comprueba el identificador.";
+        return;
+      }
+
+      renderSearchResults(matches);
+
+      elements.searchMessage.textContent =
+        matches.length === 1
+          ? "Se ha encontrado un elemento."
+          : `Se han encontrado ${matches.length} elementos. ` +
+            "Selecciona uno de los resultados.";
+
+      if (matches.length === 1) {
+        showBuilding(matches[0], true);
+      }
+    });
+
+    elements.heightFilter.addEventListener("change", applyFilters);
+    elements.floorsFilter.addEventListener("change", applyFilters);
+
+    elements.resetFilters.addEventListener("click", () => {
+      elements.heightFilter.value = "0";
+      elements.floorsFilter.value = "0";
+      applyFilters();
+
+      setStatus("Filtros restablecidos");
+    });
+
+    elements.buildingsToggle.addEventListener("change", () => {
+      state.buildingsVisible = elements.buildingsToggle.checked;
+
+      if (map.getLayer("benidorm-buildings-3d")) {
+        map.setLayoutProperty(
+          "benidorm-buildings-3d",
+          "visibility",
+          state.buildingsVisible ? "visible" : "none"
+        );
+      }
+
+      setStatus(
+        state.buildingsVisible
+          ? "Edificios 3D visibles"
+          : "Edificios 3D ocultos"
+      );
+    });
+
+    elements.thermalMode.addEventListener("click", () => {
+      setBuildingStyle("thermal");
+    });
+
+    elements.architecturalMode.addEventListener("click", () => {
+      setBuildingStyle("architectural");
+    });
+
+    map.on("load", async () => {
+      setStatus("Cargando datos catastrales...");
+
+      try {
+        const response = await fetch(DATA_URL);
+
+        if (!response.ok) {
+          throw new Error(
+            `No se pudo cargar el GeoJSON: HTTP ${response.status}`
+          );
+        }
+
+        const data = await response.json();
+
+        if (!data || !Array.isArray(data.features)) {
+          throw new Error(
+            "El archivo no contiene una colección GeoJSON válida."
+          );
+        }
+
+        state.features = data.features;
+        state.dataLoaded = true;
+
+        addBuildingsLayer(data);
+        updateStatistics();
+        setBuildingStyle("thermal");
+        applyFilters();
+
+        setStatus(
+          `${formatNumber(state.features.length, 0)} objetos cargados`
+        );
+
+        map.on("click", "benidorm-buildings-3d", event => {
+          if (!event.features || !event.features.length) {
+            return;
+          }
+
+          const clicked = event.features[0];
+          const properties = clicked.properties || {};
+
+          const id = getProperty(properties, [
+            "fid",
+            "gml_id",
+            "gmlId",
+            "localId"
+          ]);
+
+          let feature = state.features.find(item => {
+            const itemProperties = item.properties || {};
+
+            return (
+              String(getProperty(itemProperties, [
+                "fid",
+                "gml_id",
+                "gmlId",
+                "localId"
+              ])) === String(id)
+            );
+          });
+
+          if (!feature && clicked.geometry) {
+            feature = clicked;
+          }
+
+          if (feature) {
+            showBuilding(feature, false);
+          }
+        });
+
+        map.on("mouseenter", "benidorm-buildings-3d", () => {
+          map.getCanvas().style.cursor = "pointer";
+        });
+
+        map.on("mouseleave", "benidorm-buildings-3d", () => {
+          map.getCanvas().style.cursor = "";
+        });
+
+      } catch (error) {
+        console.error("Error cargando Benidorm 3D:", error);
+
+        setStatus("Error al cargar los datos");
+
+        elements.searchMessage.textContent =
+          "No se ha podido cargar benidorm_buildings.geojson. " +
+          "Comprueba que está en la misma carpeta que index.html " +
+          "y que el servidor local está funcionando.";
+      }
+    });
+
+    map.on("error", event => {
+      if (event && event.error) {
+        console.error("Error de MapLibre:", event.error);
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

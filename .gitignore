@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Archivos temporales y copias de seguridad
+*.tmp
+*.bak
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+.Python
+
+# Entornos virtuales
+.venv/
+venv/
