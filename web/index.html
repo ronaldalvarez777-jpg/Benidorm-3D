@@ -702,6 +702,28 @@
 
       <div class="section-title">Capas cartográficas</div>
 
+      <div class="control-card">
+        <label class="search-label" for="basemap-select">MAPA BASE</label>
+        <select id="basemap-select" class="filter-select">
+          <option value="dark">Mapa oscuro</option>
+          <option value="pnoa">Ortofoto PNOA (IGN)</option>
+        </select>
+        <div class="layer-description">
+          Cambia el fondo sin ocultar los edificios 3D.
+        </div>
+      </div>
+
+      <div class="control-card">
+        <label class="search-label" for="terrain-toggle">RELIEVE 3D</label>
+        <select id="terrain-toggle" class="filter-select">
+          <option value="on">Activado</option>
+          <option value="off">Desactivado</option>
+        </select>
+        <div class="layer-description">
+          Activa o desactiva el relieve del terreno.
+        </div>
+      </div>
+
       <div class="layer-row">
         <div>
           <div class="layer-name">Edificios 3D</div>
@@ -811,6 +833,8 @@
       resetFilters: document.getElementById("reset-filters"),
       filterMessage: document.getElementById("filter-message"),
       buildingsToggle: document.getElementById("buildings-toggle"),
+      basemapSelect: document.getElementById("basemap-select"),
+      terrainToggle: document.getElementById("terrain-toggle"),
       thermalMode: document.getElementById("thermal-mode"),
       architecturalMode: document.getElementById("architectural-mode"),
       heightLegend: document.getElementById("height-legend"),
@@ -846,6 +870,55 @@
       }),
       "bottom-right"
     );
+
+
+    function configureBasemaps() {
+      state.baseStyleLayerIds = map.getStyle().layers.map(layer => layer.id);
+
+      const tileUrl = [
+        "https:", "", "www.ign.es", "wmts", "pnoa-ma"
+      ].join("/") +
+        "?service=WMTS&request=GetTile&version=1.0.0" +
+        "&layer=OI.OrthoimageCoverage&style=default" +
+        "&tilematrixset=GoogleMapsCompatible" +
+        "&TileMatrix={z}&TileRow={y}&TileCol={x}" +
+        "&format=image/jpeg";
+
+      map.addSource("pnoa-ortho", {
+        type: "raster",
+        tiles: [tileUrl],
+        tileSize: 256,
+        attribution: "Ortofotos PNOA Máxima Actualidad © IGN/CNIG"
+      });
+
+      map.addLayer({
+        id: "pnoa-ortho-layer",
+        type: "raster",
+        source: "pnoa-ortho",
+        layout: { visibility: "none" },
+        paint: { "raster-opacity": 1 }
+      });
+
+      elements.basemapSelect.addEventListener("change", () => {
+        const usePnoa = elements.basemapSelect.value === "pnoa";
+
+        state.baseStyleLayerIds.forEach(id => {
+          if (map.getLayer(id)) {
+            map.setLayoutProperty(
+              id, "visibility", usePnoa ? "none" : "visible"
+            );
+          }
+        });
+
+        map.setLayoutProperty(
+          "pnoa-ortho-layer",
+          "visibility",
+          usePnoa ? "visible" : "none"
+        );
+
+        setStatus(usePnoa ? "Ortofoto PNOA activada" : "Mapa oscuro activado");
+      });
+    }
 
     function escapeHTML(value) {
       return String(value ?? "No disponible").replace(
@@ -1514,6 +1587,44 @@
     });
 
     map.on("load", async () => {
+      const terrainTiles = [
+        "https:",
+        "",
+        "elevation-tiles-prod.s3.amazonaws.com",
+        "terrarium",
+        "{z}",
+        "{x}",
+        "{y}.png"
+      ].join("/");
+
+      map.addSource("terrain-dem", {
+        type: "raster-dem",
+        tiles: [terrainTiles],
+        tileSize: 256,
+        encoding: "terrarium",
+        maxzoom: 15
+      });
+
+      map.setTerrain({
+        source: "terrain-dem",
+        exaggeration: 1.2
+      });
+
+      elements.terrainToggle.addEventListener("change", () => {
+        const enabled = elements.terrainToggle.value === "on";
+
+        map.setTerrain(
+          enabled
+            ? { source: "terrain-dem", exaggeration: 1.2 }
+            : null
+        );
+
+        setStatus(
+          enabled ? "Relieve 3D activado" : "Relieve 3D desactivado"
+        );
+      });
+
+      configureBasemaps();
       setStatus("Cargando datos catastrales...");
 
       try {
