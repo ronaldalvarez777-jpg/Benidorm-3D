@@ -1625,6 +1625,14 @@
       });
 
       configureBasemaps();
+
+      map.setLight({
+        anchor: "viewport",
+        color: "#ffffff",
+        intensity: 0.55,
+        position: [1.15, 210, 35]
+      });
+
       setStatus("Cargando datos catastrales...");
 
       try {
