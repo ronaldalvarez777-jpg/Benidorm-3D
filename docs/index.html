@@ -489,6 +489,20 @@
       font-weight: 800;
     }
 
+    .popup-estimate-badge {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 3px 5px;
+      color: #f5c66b;
+      background: #46371c;
+      border: 1px solid #75602e;
+      border-radius: 4px;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      vertical-align: middle;
+    }
+
     .popup-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1249,7 +1263,8 @@
 
           <div class="popup-highlight">
             <div class="popup-highlight-label">
-              Altura estimada
+              ALTURA ESTIMADA
+              <span class="popup-estimate-badge">ESTIMACIÓN</span>
             </div>
 
             <div class="popup-highlight-value">
@@ -1324,9 +1339,10 @@
           </div>
 
           <div class="popup-note">
-            La altura se estima multiplicando las plantas sobre
-            rasante por 3 m. La precisión horizontal declarada
-            corresponde a la geometría horizontal, no a la altura.
+            ALTURA DERIVADA: se calcula multiplicando las plantas
+            sobre rasante por 3 m. Es una estimación orientativa,
+            no una medición directa. La precisión horizontal
+            declarada se refiere a la geometría en planta, no a la altura.
           </div>
         </div>
       `;
