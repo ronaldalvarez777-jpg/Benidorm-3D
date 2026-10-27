@@ -420,6 +420,374 @@
       backdrop-filter: blur(12px);
     }
 
+    .urban-stats-toggle {
+      position: absolute;
+      z-index: 5;
+      left: 18px;
+      top: 18px;
+      padding: 11px 15px;
+      color: #e8f4ff;
+      background: rgba(12, 22, 35, 0.94);
+      border: 1px solid #3a607d;
+      border-radius: 9px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 24px #00000035;
+      backdrop-filter: blur(12px);
+    }
+    .urban-stats-toggle:hover {
+      background: #17334a;
+      border-color: #45c5f5;
+    }
+    .urban-stats-window {
+      position: absolute;
+      z-index: 10;
+      top: 68px;
+      left: 18px;
+      width: min(390px, calc(100% - 36px));
+      max-height: min(72vh, 620px);
+      overflow-y: auto;
+      padding: 18px;
+      color: #e6f1fc;
+      background: rgba(11, 19, 30, 0.97);
+      border: 1px solid #354b62;
+      border-radius: 14px;
+      box-shadow: 0 18px 50px #00000070;
+      backdrop-filter: blur(18px);
+    }
+    .urban-stats-window[hidden] {
+      display: none;
+    }
+    .urban-stats-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .urban-stats-title {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 700;
+    }
+    .urban-stats-subtitle {
+      margin: 5px 0 14px;
+      color: #94a8bd;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+    .urban-stats-close {
+      flex-shrink: 0;
+      padding: 5px 9px;
+      color: #dce8f5;
+      background: #172536;
+      border: 1px solid #354b62;
+      border-radius: 7px;
+      font: inherit;
+      cursor: pointer;
+    }
+    .urban-chart-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      margin-bottom: 22px;
+    }
+    .urban-chart-metric {
+      padding: 12px;
+      background: rgba(148, 163, 184, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 9px;
+    }
+    .urban-chart-label {
+      display: block;
+      min-height: 30px;
+      color: #9fb2c7;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+    .urban-chart-metric strong {
+      display: block;
+      margin-top: 6px;
+      color: #f1f7ff;
+      font-size: 21px;
+      font-weight: 700;
+    }
+    .urban-chart-heading {
+      margin: 0 0 5px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .urban-chart-note, .urban-chart-footnote {
+      color: #91a5bb;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+    .urban-chart-note { margin: 0 0 16px; }
+
+    .ndvi-chart {
+      display: grid;
+      gap: 13px;
+      margin: 18px 0 10px;
+    }
+
+    .ndvi-chart-row {
+      display: grid;
+      gap: 6px;
+    }
+
+    .ndvi-chart-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      color: #e2e8f0;
+      font-size: 11px;
+    }
+
+    .ndvi-chart-value {
+      color: #f8fafc;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .ndvi-chart-track {
+      height: 10px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: rgba(148, 163, 184, 0.15);
+    }
+
+    .ndvi-chart-bar {
+      height: 100%;
+      min-width: 2px;
+      border-radius: inherit;
+    }
+
+    .ndvi-chart-bar-0 { background: #7f1d1d; }
+    .ndvi-chart-bar-1 { background: #f97316; }
+    .ndvi-chart-bar-2 { background: #facc15; }
+    .ndvi-chart-bar-3 { background: #65a30d; }
+    .ndvi-chart-bar-4 { background: #14532d; }
+
+    .ndvi-chart-scale {
+      display: flex;
+      justify-content: space-between;
+      color: #91a5bb;
+      font-size: 10px;
+      margin-top: -5px;
+    }
+    .urban-chart-footnote { margin: 16px 0 0; }
+    .urban-stats-chart {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+      margin: 22px 0 10px;
+    }
+
+    .urban-chart-row {
+      display: grid;
+      grid-template-rows: 34px 180px auto;
+      gap: 9px;
+      min-width: 0;
+      text-align: center;
+    }
+
+    .urban-chart-row-head {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: end;
+      gap: 3px;
+      min-width: 0;
+      font-size: 10px;
+    }
+
+    .urban-chart-range {
+      color: #e0ebf7;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .urban-chart-value {
+      color: #b8c9dc;
+      white-space: normal;
+      font-size: 10px;
+      line-height: 1.3;
+    }
+
+    .urban-chart-track {
+      height: 180px;
+      display: flex;
+      align-items: flex-end;
+      min-width: 0;
+      overflow: hidden;
+      background: repeating-linear-gradient(
+        to top,
+        #1b2939 0,
+        #1b2939 1px,
+        transparent 1px,
+        transparent 45px
+      );
+      border-bottom: 1px solid #60758c;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .urban-chart-bar {
+      width: 100%;
+      height: 0;
+      min-height: 2px;
+      border-radius: 5px 5px 0 0;
+      transition: height 350ms ease;
+    }
+
+    .urban-chart-bar-0 { background: #38bdf8; }
+    .urban-chart-bar-1 { background: #34d399; }
+    .urban-chart-bar-2 { background: #fbbf24; }
+    .urban-chart-bar-3 { background: #fb7185; }
+
+    
+    .road-stats-section {
+      margin-top: 8px;
+    }
+
+    .road-stats-divider {
+      height: 1px;
+      background: rgba(148, 163, 184, 0.28);
+      margin: 20px 0 18px;
+    }
+
+    .road-stats-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 14px 0 8px;
+    }
+
+    .road-stats-visual {
+      display: flex;
+      justify-content: center;
+      padding: 18px 0 14px;
+    }
+
+    .road-stats-donut {
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #334155;
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .road-stats-donut-center {
+      width: 116px;
+      height: 116px;
+      border-radius: 50%;
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 3px;
+      color: #f8fafc;
+    }
+
+    .road-stats-donut-center strong {
+      font-size: 23px;
+      line-height: 1.15;
+      font-weight: 750;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .road-stats-donut-center span {
+      font-size: 11px;
+      color: #cbd5e1;
+    }
+
+    .road-stats-legend {
+      display: grid;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .road-stats-legend-row {
+      display: grid;
+      grid-template-columns: 10px minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 9px;
+      font-size: 12px;
+    }
+
+    .road-stats-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      margin-top: 3px;
+    }
+
+    .road-stats-legend-name {
+      color: #e2e8f0;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    .road-stats-legend-value {
+      color: #f8fafc;
+      text-align: right;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .road-stats-legend-value small {
+      display: block;
+      margin-top: 2px;
+      color: #94a3b8;
+      font-size: 11px;
+    }
+
+    
+    #urban-building-stats[hidden],
+    .road-stats-section[hidden] {
+      display: none !important;
+    }
+
+@media (max-width: 480px) {
+      .road-stats-donut {
+        width: 170px;
+        height: 170px;
+      }
+
+      .road-stats-donut-center {
+        width: 104px;
+        height: 104px;
+      }
+
+      .road-stats-donut-center strong {
+        font-size: 21px;
+      }
+    }
+
+@media (max-width: 480px) {
+      .urban-stats-chart { gap: 7px; }
+      .urban-chart-row { grid-template-rows: 42px 145px auto; gap: 7px; }
+      .urban-chart-track { height: 145px; }
+      .urban-chart-range, .urban-chart-value { font-size: 9px; }
+    }
+
+    .urban-stats-placeholder {
+      padding: 16px;
+      color: #a9bbce;
+      background: rgba(148, 163, 184, 0.07);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 9px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
     .map-status::before {
       display: inline-block;
       width: 7px;
@@ -563,7 +931,985 @@
         right: 10px;
       }
     }
-  </style>
+
+    /* GeoNOV — refinamiento visual de la interfaz */
+    :root {
+      --background: #080d14;
+      --panel: #101925;
+      --panel-light: #172436;
+      --border: #26374b;
+      --text: #edf5ff;
+      --muted: #9aabc0;
+      --accent: #45c5f5;
+      --green: #42d6a0;
+    }
+
+    .app {
+      grid-template-columns: 330px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      background:
+        linear-gradient(180deg, #0d1520 0%, #090e15 44%, #0b111a 100%);
+      scrollbar-width: thin;
+      scrollbar-color: #34465b transparent;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #34465b;
+      border-radius: 8px;
+    }
+
+    .brand-header {
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom-color: #29394c;
+    }
+
+    .brand-mark {
+      background: linear-gradient(145deg, #173b53, #101b2b);
+      border-color: #32617c;
+      box-shadow: 0 0 24px #38bdf814;
+    }
+
+    h1 {
+      font-size: 29px;
+      letter-spacing: -1.15px;
+    }
+
+    .subtitle {
+      max-width: 270px;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .location-tag {
+      background: #111c29;
+      border-color: #2b4056;
+      border-radius: 5px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 29px;
+      margin-bottom: 14px;
+      color: #dce9f8;
+      font-size: 10px;
+      letter-spacing: 1.45px;
+    }
+
+    .section-title::before {
+      width: 3px;
+      height: 13px;
+      flex: 0 0 3px;
+      background: var(--accent);
+      border-radius: 3px;
+      content: "";
+    }
+
+    .search-control,
+    .control-card,
+    .stat-card,
+    .layer-row,
+    .legend {
+      background: linear-gradient(145deg, #121d2a, #0f1722);
+      border-color: #29394d;
+      border-radius: 10px;
+      box-shadow: 0 5px 16px #00000012;
+    }
+
+    .search-control,
+    .control-card,
+    .layer-row {
+      transition: border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .search-control:focus-within,
+    .control-card:focus-within {
+      border-color: #3c7898;
+    }
+
+    input[type="search"],
+    .filter-select {
+      background-color: #0a111b;
+      border-color: #304258;
+      border-radius: 7px;
+    }
+
+    input:focus,
+    .filter-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px #38bdf817;
+    }
+
+    .primary-button,
+    .style-button {
+      border-radius: 7px;
+      transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+    }
+
+    .primary-button {
+      background: linear-gradient(135deg, #15506b, #17384e);
+      border-color: #34718d;
+    }
+
+    .primary-button:hover,
+    .style-button:hover {
+      background: #20516a;
+      border-color: #4c9bbd;
+    }
+
+    .primary-button:active,
+    .style-button:active {
+      transform: translateY(1px);
+    }
+
+    .stats-grid {
+      gap: 10px;
+    }
+
+    .stat-card {
+      position: relative;
+      overflow: hidden;
+      padding: 14px 12px;
+      background: linear-gradient(150deg, #152131, #101722 80%);
+      border-color: #2b3b50;
+    }
+
+    .stat-card::before {
+      position: absolute;
+      top: 0;
+      left: 12px;
+      right: 12px;
+      height: 1px;
+      background: linear-gradient(90deg, #45c5f580, transparent);
+      content: "";
+    }
+
+    .stat-label {
+      color: #a7b8cc;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .stat-value {
+      color: #f1f7ff;
+      font-variant-numeric: tabular-nums;
+      font-size: 25px;
+      letter-spacing: -0.9px;
+    }
+
+    .stat-unit {
+      line-height: 1.5;
+    }
+
+    .layer-row {
+      background: #111b28;
+    }
+
+    .layer-row:hover {
+      border-color: #3b526b;
+    }
+
+    .style-button {
+      background: #121f2d;
+      border-color: #2c4055;
+    }
+
+    .style-button.active {
+      background: linear-gradient(135deg, #17475d, #153247);
+      border-color: #45c5f5;
+      box-shadow: inset 0 0 0 1px #45c5f51a;
+    }
+
+    .legend {
+      background: #111a26;
+    }
+
+    .method-note {
+      padding: 11px 12px;
+      background: #0e1722;
+      border-left: 2px solid #38536b;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .map-area {
+      background: #080d14;
+      box-shadow: inset 1px 0 0 #25374a;
+    }
+
+    .map-status {
+      padding: 11px 15px;
+      background: #0b121deF;
+      border-color: #3a5067;
+      border-radius: 9px;
+      box-shadow: 0 8px 28px #00000035;
+      backdrop-filter: blur(16px);
+    }
+
+    .maplibregl-ctrl-group {
+      overflow: hidden;
+      background: #101925 !important;
+      border: 1px solid #35485e !important;
+      border-radius: 8px !important;
+      box-shadow: 0 5px 18px #00000035 !important;
+    }
+
+    .maplibregl-ctrl-group button {
+      background-color: #101925 !important;
+    }
+
+    .maplibregl-ctrl-group button + button {
+      border-top-color: #29394c !important;
+    }
+
+    .maplibregl-ctrl-group button:hover {
+      background-color: #1b2b3d !important;
+    }
+
+    @media (min-width: 761px) {
+      .sidebar {
+        padding: 24px 20px 32px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .app {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(0, 48%) minmax(0, 52%);
+      }
+
+      .sidebar {
+        padding: 17px;
+      }
+
+      h1 {
+        font-size: 23px;
+      }
+    }
+
+  
+
+    /* GEONOV URBAN INTELLIGENCE REDESIGN V2 */
+    .app {
+      grid-template-columns: 350px minmax(0, 1fr);
+      background: #080e17;
+      gap: 0;
+    }
+
+    .sidebar {
+      position: relative;
+      z-index: 2;
+      background:
+        linear-gradient(180deg, #142235 0%, #0c1522 240px, #0a111b 100%);
+      border-right: 1px solid #30445c;
+      box-shadow: 8px 0 30px rgba(0, 0, 0, 0.22);
+      scrollbar-width: thin;
+      scrollbar-color: #40566e #0b1420;
+    }
+
+    .brand-header {
+      padding-bottom: 22px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid #2a3c52;
+    }
+
+    .brand-mark {
+      box-shadow: 0 0 22px rgba(69, 197, 245, 0.16);
+    }
+
+    .section-title {
+      margin-top: 25px;
+      margin-bottom: 13px;
+      padding: 0 0 9px 10px;
+      border-bottom: 1px solid #293a4f;
+      border-left: 3px solid #45c5f5;
+      color: #d9eaff;
+      letter-spacing: 1.25px;
+    }
+
+    .control-card,
+    .stat-card {
+      border-color: #2b3d52;
+      border-radius: 11px;
+      box-shadow: 0 5px 16px rgba(0, 0, 0, 0.13);
+    }
+
+    .control-card {
+      background: linear-gradient(145deg, #142235, #101a28);
+      padding: 15px;
+    }
+
+    .stat-card {
+      background: linear-gradient(145deg, #18283a, #101a28);
+      padding: 13px;
+    }
+
+    .stat-value {
+      color: #f0f7ff;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .search-input,
+    .filter-select {
+      min-height: 40px;
+      border-radius: 8px;
+      background-color: #091421;
+      border-color: #354b63;
+    }
+
+    .search-input:focus,
+    .filter-select:focus {
+      outline: 2px solid rgba(69, 197, 245, 0.45);
+      outline-offset: 1px;
+    }
+
+    .primary-button {
+      min-height: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.16);
+    }
+
+    .style-buttons {
+      gap: 8px;
+    }
+
+    .style-button {
+      min-height: 40px;
+      border-radius: 8px;
+    }
+
+    .map-area {
+      min-width: 0;
+      min-height: 0;
+      padding: 13px;
+      background:
+        radial-gradient(ellipse at 50% 45%, #17283b 0%, #0b1420 72%);
+      box-shadow: none;
+    }
+
+    #map {
+      inset: 13px;
+      overflow: hidden;
+      border: 1px solid #354b62;
+      border-radius: 13px;
+      box-shadow:
+        0 16px 45px rgba(0, 0, 0, 0.35),
+        0 0 0 4px rgba(35, 57, 79, 0.22);
+    }
+
+    .map-status {
+      top: 29px;
+      right: 29px;
+      max-width: calc(100% - 58px);
+      padding: 12px 16px;
+      border: 1px solid #42617c;
+      border-radius: 10px;
+      background: rgba(8, 18, 30, 0.94);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.32);
+      color: #e8f5ff;
+      font-size: 11px;
+      letter-spacing: 0.2px;
+    }
+
+    .maplibregl-ctrl-top-right {
+      top: 76px;
+      right: 27px;
+    }
+
+    .maplibregl-ctrl-group {
+      border: 1px solid #40566e !important;
+      border-radius: 9px !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    .maplibregl-popup-content {
+      border: 1px solid #344b62;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 760px) {
+      .app {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(0, 48%) minmax(0, 52%);
+      }
+
+      .sidebar {
+        border-right: 0;
+        border-bottom: 1px solid #30445c;
+      }
+
+      .map-area {
+        padding: 7px;
+      }
+
+      #map {
+        inset: 7px;
+        border-radius: 9px;
+      }
+
+      .map-status {
+        top: 17px;
+        right: 17px;
+        max-width: calc(100% - 34px);
+      }
+
+      .maplibregl-ctrl-top-right {
+        top: 66px;
+        right: 15px;
+      }
+    }
+
+  
+
+    /* GEONOV BUILDING DETAIL CARD V1 */
+    .maplibregl-popup-content {
+      overflow: hidden;
+      border: 1px solid #344b62;
+      border-radius: 12px;
+      background: #0c1522;
+      color: #edf5ff;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.42);
+    }
+
+    .maplibregl-popup-close-button {
+      top: 8px;
+      right: 9px;
+      width: 27px;
+      height: 27px;
+      border-radius: 6px;
+      color: #c8d8e9;
+      font-size: 20px;
+    }
+
+    .maplibregl-popup-close-button:hover {
+      background: #23364b;
+      color: #ffffff;
+    }
+
+    .maplibregl-popup-tip {
+      border-top-color: #0c1522 !important;
+      border-bottom-color: #0c1522 !important;
+    }
+
+    .popup-content {
+      min-width: 255px;
+      max-width: 330px;
+      padding: 19px;
+    }
+
+    .popup-eyebrow {
+      margin-bottom: 7px;
+      color: #54c9f5;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.35px;
+    }
+
+    .popup-title {
+      margin: 0 25px 15px 0;
+      color: #f1f7ff;
+      font-size: 17px;
+      font-weight: 750;
+      line-height: 1.3;
+    }
+
+    .popup-highlight {
+      margin-bottom: 17px;
+      padding: 15px;
+      border: 1px solid #294b62;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #17364a, #122638 75%);
+    }
+
+    .popup-highlight-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #b7cde0;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .65px;
+    }
+
+    .popup-highlight-value {
+      margin-top: 8px;
+      color: #f3fbff;
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .popup-estimate-badge {
+      padding: 4px 6px;
+      color: #ffdc91;
+      background: #46371c;
+      border: 1px solid #75602e;
+      border-radius: 5px;
+      font-size: 8px;
+      font-weight: 800;
+    }
+
+    .popup-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .popup-field {
+      min-width: 0;
+      padding: 11px;
+      border: 1px solid #26394d;
+      border-radius: 8px;
+      background: #111e2d;
+    }
+
+    .popup-field-label {
+      margin-bottom: 7px;
+      color: #91a8bf;
+      font-size: 9px;
+      line-height: 1.4;
+    }
+
+    .popup-field-value {
+      color: #e8f3ff;
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .popup-note {
+      margin-top: 15px;
+      padding: 11px 12px;
+      border-left: 3px solid #45c5f5;
+      border-radius: 0 7px 7px 0;
+      background: #111e2c;
+      color: #a9bbce;
+      font-size: 10px;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 400px) {
+      .popup-content {
+        min-width: 0;
+        padding: 14px;
+      }
+
+      .popup-highlight-value {
+        font-size: 26px;
+      }
+
+      .popup-field {
+        padding: 9px;
+      }
+    }
+
+  
+
+    /* GeoNOV — refinamiento visual del panel cartográfico V1 */
+    .control-card {
+      background: linear-gradient(145deg, rgba(20, 32, 47, 0.96), rgba(13, 23, 35, 0.96));
+      border-color: rgba(112, 143, 174, 0.22);
+      border-radius: 11px;
+      transition: border-color 160ms ease, background 160ms ease;
+    }
+
+    .control-card:hover {
+      border-color: rgba(69, 197, 245, 0.42);
+    }
+
+    .control-card .layer-row {
+      margin: -1px -1px 10px;
+      padding: 2px 0 10px;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid rgba(112, 143, 174, 0.18);
+      border-radius: 0;
+    }
+
+    .control-card .layer-name {
+      color: #edf5ff;
+      letter-spacing: 0.1px;
+    }
+
+    .control-card .layer-description {
+      line-height: 1.5;
+    }
+
+    .control-card .legend-title {
+      color: #c8d9eb;
+    }
+
+    .control-card .legend-swatch {
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+\n
+
+    /* GeoNOV — panel cartográfico V2 */
+    .control-card {
+      position: relative;
+      overflow: hidden;
+      padding: 15px;
+      background: linear-gradient(135deg, #111e2d 0%, #0c1521 100%);
+      border: 1px solid #2a4057;
+      border-radius: 13px;
+      box-shadow: 0 5px 16px rgba(0, 0, 0, 0.16);
+    }
+
+    .control-card::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, #45c5f5, rgba(69, 197, 245, 0.08));
+      content: "";
+    }
+
+    .control-card:hover {
+      border-color: #3c6584;
+      box-shadow: 0 7px 22px rgba(0, 0, 0, 0.24);
+    }
+
+    .control-card .layer-row {
+      margin: 0 0 13px;
+      padding: 2px 0 12px;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid #26394d;
+      border-radius: 0;
+    }
+
+    .control-card .layer-name {
+      color: #f0f7ff;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .control-card .layer-description {
+      color: #91a8bf;
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .control-card .legend-title {
+      margin-bottom: 10px;
+      color: #70d7fa;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .control-card .legend-item {
+      margin: 0;
+      padding: 7px 5px;
+      border-bottom: 1px solid rgba(112, 143, 174, 0.10);
+      border-radius: 5px;
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .control-card .legend-item:last-child {
+      border-bottom-color: transparent;
+    }
+
+    .control-card .legend-swatch {
+      width: 15px;
+      height: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 4px;
+      box-shadow: 0 0 8px rgba(69, 197, 245, 0.08);
+    }
+
+    .control-card input[type="checkbox"] {
+      accent-color: #45c5f5;
+      cursor: pointer;
+    }
+
+    .control-card input[type="checkbox"][id$="-toggle"] {
+      appearance: none;
+      -webkit-appearance: none;
+      position: relative;
+      flex: 0 0 36px;
+      width: 36px;
+      height: 20px;
+      margin: 0;
+      border: 1px solid #40536a;
+      border-radius: 999px;
+      background: #1a2939;
+      transition: background 160ms ease, border-color 160ms ease;
+    }
+
+    .control-card input[type="checkbox"][id$="-toggle"]::after {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #9aabc0;
+      content: "";
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    .control-card input[type="checkbox"][id$="-toggle"]:checked {
+      border-color: #45c5f5;
+      background: #15506b;
+    }
+
+    .control-card input[type="checkbox"][id$="-toggle"]:checked::after {
+      transform: translateX(16px);
+      background: #e8f9ff;
+    }
+
+    .control-card input[type="checkbox"]:focus-visible,
+    .control-card select:focus-visible {
+      outline: 2px solid #45c5f5;
+      outline-offset: 3px;
+    }
+
+    .control-card .filter-select {
+      min-height: 39px;
+      border-color: #31485e;
+      border-radius: 8px;
+      background-color: #101d2b;
+    }
+
+
+
+    /* GeoNOV — dashboard de inteligencia urbana V1 */
+    #urban-dashboard .stats-grid {
+      gap: 10px;
+    }
+
+    #urban-dashboard .stat-card {
+      position: relative;
+      padding: 15px 13px;
+      background: linear-gradient(145deg, #17283b 0%, #101a28 100%);
+      border: 1px solid #2c4259;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+      transition: border-color 180ms ease, transform 180ms ease;
+    }
+
+    #urban-dashboard .stat-card:hover {
+      border-color: #45a9d4;
+      transform: translateY(-2px);
+    }
+
+    #urban-dashboard > .stats-grid > .stat-card:first-child {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      column-gap: 12px;
+      background: linear-gradient(115deg, #12344a, #142537 72%);
+      border-color: #28617e;
+    }
+
+    #urban-dashboard > .stats-grid > .stat-card:first-child .stat-label {
+      min-height: 0;
+      color: #b9dced;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    #urban-dashboard > .stats-grid > .stat-card:first-child .stat-value {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      color: #73dcff;
+      font-size: 31px;
+      letter-spacing: -1px;
+    }
+
+    #urban-dashboard > .stats-grid > .stat-card:first-child .stat-unit {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    #urban-dashboard .stat-label {
+      min-height: 30px;
+      color: #a9bdd2;
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    #urban-dashboard .stat-value {
+      margin-top: 7px;
+      color: #f1f7ff;
+      font-size: 26px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.8px;
+    }
+
+    #urban-dashboard .stat-unit {
+      margin-top: 5px;
+      color: #8fa6bd;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 390px) {
+      #urban-dashboard > .stats-grid > .stat-card:first-child .stat-value {
+        font-size: 25px;
+      }
+    }
+
+
+
+    /* GeoNOV — indicadores LISA y alturas V1 */
+
+    #urban-dashboard .stat-card:has(#lisa-significant) {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      column-gap: 12px;
+      background: linear-gradient(115deg, #12384a, #142537 78%);
+      border-color: #286b86;
+      border-left: 3px solid #38bdf8;
+    }
+
+    #urban-dashboard .stat-card:has(#lisa-significant) .stat-label {
+      min-height: 0;
+      color: #b9dced;
+    }
+
+    #urban-dashboard .stat-card:has(#lisa-significant) .stat-value {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      margin-top: 0;
+      color: #73dcff;
+      font-size: 30px;
+    }
+
+    #urban-dashboard .stat-card:has(#lisa-significant) .stat-unit {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-card {
+      border-left: 3px solid #40546b;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-card:has(#lisa-hh) {
+      border-left-color: #34d399;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-card:has(#lisa-hh) .stat-value {
+      color: #6ee7b7;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-card:has(#lisa-ll) {
+      border-left-color: #60a5fa;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-card:has(#lisa-ll) .stat-value {
+      color: #93c5fd;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-card:has(#lisa-hl) {
+      border-left-color: #fb923c;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-card:has(#lisa-hl) .stat-value {
+      color: #fdba74;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-card:has(#lisa-lh) {
+      border-left-color: #c084fc;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-card:has(#lisa-lh) .stat-value {
+      color: #d8b4fe;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-card:has(#lisa-ns) {
+      border-left-color: #64748b;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-card:has(#lisa-ns) .stat-value {
+      color: #cbd5e1;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-card:has(#lisa-total) {
+      background: linear-gradient(145deg, #1d3045, #111d2b);
+    }
+
+    @media (max-width: 390px) {
+      #urban-dashboard .stat-card:has(#lisa-significant) .stat-value {
+        font-size: 25px;
+      }
+    }
+
+
+
+    /* GeoNOV — tarjetas LISA V1 */
+    #urban-dashboard #lisa-total,
+    #urban-dashboard #lisa-significant {
+      color: #73dcff;
+    }
+
+    #urban-dashboard #lisa-hh {
+      color: #fb7185;
+    }
+
+    #urban-dashboard #lisa-ll {
+      color: #60a5fa;
+    }
+
+    #urban-dashboard #lisa-hl {
+      color: #fbbf24;
+    }
+
+    #urban-dashboard #lisa-lh {
+      color: #c084fc;
+    }
+
+    #urban-dashboard #lisa-ns {
+      color: #94a3b8;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-hh) .stat-card,
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-card {
+      min-height: 94px;
+      padding: 13px 12px;
+      background: linear-gradient(145deg, #17283b, #101a28);
+      border-color: #2c4259;
+      border-radius: 11px;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-hh) .stat-label,
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-label {
+      min-height: 30px;
+      line-height: 1.45;
+    }
+
+    #urban-dashboard .stats-grid:has(#lisa-hh) .stat-value,
+    #urban-dashboard .stats-grid:has(#lisa-total) .stat-value {
+      font-size: 25px;
+      font-variant-numeric: tabular-nums;
+    }
+
+</style>
 </head>
 
 <body>
@@ -706,6 +2052,12 @@
           <div id="stat-height" class="stat-value">—</div>
           <div class="stat-unit">Metros</div>
         </div>
+        <div class="stat-card">
+          <div class="stat-label">Altura mediana estimada</div>
+          <div id="stat-height-median" class="stat-value">—</div>
+          <div class="stat-unit">Metros · alturas mayores que cero</div>
+          <div id="stat-height-sample" class="stat-unit">Muestra: — entidades</div>
+        </div>
 
         <div class="stat-card">
           <div class="stat-label">Objetos visibles</div>
@@ -713,6 +2065,119 @@
           <div class="stat-unit">Tras aplicar filtros</div>
         </div>
       </div>
+
+      <div class="section-title">Inteligencia urbana</div>
+
+      <section id="urban-dashboard" class="control-card"
+        aria-label="Cuadro de mando territorial">
+
+        <div style="font-size:12px;font-weight:700;margin-bottom:5px;">
+          Distribución por altura estimada
+        </div>
+        <div class="stat-unit" style="margin-bottom:12px;">
+          Entidades catastrales · intervalos en metros
+        </div>
+
+        <div id="height-distribution">
+          <div style="margin-bottom:11px;">
+            <div style="display:flex;justify-content:space-between;gap:8px;font-size:11px;margin-bottom:5px;">
+              <span>0–15 m</span><strong id="height-count-0">—</strong> <span id="height-pct-0" style="color:var(--muted);font-size:10px;">—</span>
+            </div>
+            <div style="height:6px;background:var(--border);border-radius:4px;overflow:hidden;">
+              <div id="height-bar-0" style="height:100%;width:0%;background:#38bdf8;border-radius:4px;"></div>
+            </div>
+          </div>
+          <div style="margin-bottom:11px;">
+            <div style="display:flex;justify-content:space-between;gap:8px;font-size:11px;margin-bottom:5px;">
+              <span>15–30 m</span><strong id="height-count-1">—</strong> <span id="height-pct-1" style="color:var(--muted);font-size:10px;">—</span>
+            </div>
+            <div style="height:6px;background:var(--border);border-radius:4px;overflow:hidden;">
+              <div id="height-bar-1" style="height:100%;width:0%;background:#38bdf8;border-radius:4px;"></div>
+            </div>
+          </div>
+          <div style="margin-bottom:11px;">
+            <div style="display:flex;justify-content:space-between;gap:8px;font-size:11px;margin-bottom:5px;">
+              <span>30–45 m</span><strong id="height-count-2">—</strong> <span id="height-pct-2" style="color:var(--muted);font-size:10px;">—</span>
+            </div>
+            <div style="height:6px;background:var(--border);border-radius:4px;overflow:hidden;">
+              <div id="height-bar-2" style="height:100%;width:0%;background:#38bdf8;border-radius:4px;"></div>
+            </div>
+          </div>
+          <div style="margin-bottom:15px;">
+            <div style="display:flex;justify-content:space-between;gap:8px;font-size:11px;margin-bottom:5px;">
+              <span>45 m o más</span><strong id="height-count-3">—</strong> <span id="height-pct-3" style="color:var(--muted);font-size:10px;">—</span>
+            </div>
+            <div style="height:6px;background:var(--border);border-radius:4px;overflow:hidden;">
+              <div id="height-bar-3" style="height:100%;width:0%;background:#38bdf8;border-radius:4px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size:12px;font-weight:700;margin:15px 0 10px;">
+          Umbrales de altura
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Más de 30 m</div>
+            <div id="height-over-30" class="stat-value">—</div>
+            <div class="stat-unit">Entidades</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Más de 45 m</div>
+            <div id="height-over-45" class="stat-value">—</div>
+            <div class="stat-unit">Entidades</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Más de 60 m</div>
+            <div id="height-over-60" class="stat-value">—</div>
+            <div class="stat-unit">Entidades</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Celdas LISA significativas</div>
+            <div id="lisa-significant" class="stat-value">—</div>
+            <div class="stat-unit"><span id="lisa-significant-pct">—</span> del total</div>
+          </div>
+        </div>
+
+        <div style="font-size:12px;font-weight:700;margin:17px 0 10px;">
+          Autocorrelación espacial local · LISA
+        </div>
+        <div class="stat-unit" style="margin-bottom:10px;">
+          Celdas de 250 m · significación estadística
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Celdas analizadas</div>
+            <div id="lisa-total" class="stat-value">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">HH · Concentración alta</div>
+            <div id="lisa-hh" class="stat-value">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">LL · Concentración baja</div>
+            <div id="lisa-ll" class="stat-value">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">HL · Valor alto atípico</div>
+            <div id="lisa-hl" class="stat-value">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">LH · Valor bajo atípico</div>
+            <div id="lisa-lh" class="stat-value">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">No significativo</div>
+            <div id="lisa-ns" class="stat-value">—</div>
+          </div>
+        </div>
+
+        <p style="font-size:10px;line-height:1.5;color:var(--muted);margin:13px 0 0;">
+          Las alturas son estimaciones a partir de los atributos catastrales
+          disponibles. Los resultados LISA describen patrones espaciales del
+          número de entidades por celda; no representan población ni causalidad.
+        </p>
+      </section>
 
       <div class="section-title">Capas cartográficas</div>
 
@@ -724,6 +2189,94 @@
         </select>
         <div class="layer-description">
           Cambia el fondo sin ocultar los edificios 3D.
+        </div>
+      </div>
+
+      <div class="control-card">
+        <div class="layer-row">
+          <div>
+            <div class="layer-name">Red viaria y movilidad</div>
+            <div class="layer-description">IGN/CNIG · Red de transporte · Alicante</div>
+          </div>
+          <input id="roads-toggle" type="checkbox" aria-label="Mostrar u ocultar red viaria">
+        </div>
+        <div id="roads-legend" style="display:none; margin-top:12px;">
+          <div class="legend-title">Clasificación de vías</div>
+          <label class="legend-item"><input id="roads-filter-motorways" type="checkbox" checked style="width:auto; margin-right:8px;"><span class="legend-swatch" style="background:#f97316"></span>Autopistas y autovías</label>
+          <label class="legend-item"><input id="roads-filter-main" type="checkbox" checked style="width:auto; margin-right:8px;"><span class="legend-swatch" style="background:#facc15"></span>Carreteras principales</label>
+          <label class="legend-item"><input id="roads-filter-urban" type="checkbox" checked style="width:auto; margin-right:8px;"><span class="legend-swatch" style="background:#e5e7eb"></span>Calles urbanas</label>
+          <label class="legend-item"><input id="roads-filter-paths" type="checkbox" checked style="width:auto; margin-right:8px;"><span class="legend-swatch" style="background:#94a3b8"></span>Caminos y sendas</label>
+        </div>
+      </div>
+
+      <div class="control-card">
+        <div class="layer-row">
+          <div>
+            <div class="layer-name">Clústeres espaciales · LISA</div>
+            <div class="layer-description">Autocorrelación local · Edificios por celda de 250 m</div>
+          </div>
+          <input id="lisa-toggle" type="checkbox" aria-label="Mostrar u ocultar clústeres LISA">
+        </div>
+        <div id="lisa-legend" style="display:none; margin-top:12px;">
+          <div class="legend-title">Asociación espacial local</div>
+          <div class="legend-item"><span class="legend-swatch" style="background:#dc2626"></span>HH · Alta concentración rodeada de valores altos</div>
+          <div class="legend-item"><span class="legend-swatch" style="background:#2563eb"></span>LL · Baja concentración rodeada de valores bajos</div>
+          <div class="legend-item"><span class="legend-swatch" style="background:#f59e0b"></span>HL · Valor alto entre valores bajos</div>
+          <div class="legend-item"><span class="legend-swatch" style="background:#06b6d4"></span>LH · Valor bajo entre valores altos</div>
+          <div class="legend-item"><span class="legend-swatch" style="background:#94a3b8"></span>No significativo</div>
+          <div class="layer-description" style="margin-top:8px;">Moran local · 999 permutaciones · Corrección FDR al 5 %</div>
+          <div id="lisa-methodology-card" style="margin-top:14px; padding-top:12px; border-top:1px solid rgba(148,163,184,.25);">
+            <div class="legend-title">Resultados del análisis</div>
+            <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin:10px 0;">
+              <div style="padding:9px; border-radius:8px; background:rgba(148,163,184,.10);">
+                <div class="stat-label">Celdas analizadas</div>
+                <div id="lisa-method-total" class="stat-value">—</div>
+              </div>
+              <div style="padding:9px; border-radius:8px; background:rgba(148,163,184,.10);">
+                <div class="stat-label">Significativas</div>
+                <div class="stat-value"><span id="lisa-method-significant">—</span> <span id="lisa-method-pct" style="font-size:11px;">(—)</span></div>
+              </div>
+              <div style="padding:9px; border-radius:8px; background:rgba(220,38,38,.10);">
+                <div class="stat-label">Clústeres HH</div>
+                <div id="lisa-method-hh" class="stat-value">—</div>
+              </div>
+              <div style="padding:9px; border-radius:8px; background:rgba(37,99,235,.10);">
+                <div class="stat-label">Clústeres LL</div>
+                <div id="lisa-method-ll" class="stat-value">—</div>
+              </div>
+            </div>
+            <div class="layer-description">Distribución adicional: <span id="lisa-method-extra">—</span>. Las categorías describen la clasificación espacial; la significación estadística se calcula por separado.</div>
+
+            <div class="legend-title" style="margin-top:14px;">Metodología e interpretación</div>
+            <div class="layer-description" style="margin-top:8px; line-height:1.6;">
+              <strong>Variable:</strong> número de edificios por celda de 250 m, incluyendo celdas con cero edificios.<br>
+              <strong>Método:</strong> Moran local (LISA), matriz de vecindad Queen y 999 permutaciones.<br>
+              <strong>Significación:</strong> corrección por tasa de falsos descubrimientos (FDR), con umbral del 5 %.
+            </div>
+            <div class="layer-description" style="margin-top:8px; line-height:1.6;">
+              HH y LL identifican asociaciones locales de valores similares altos o bajos; HL y LH señalan valores locales distintos de los de su entorno. Los resultados describen asociaciones espaciales y no demuestran causalidad.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="control-card">
+        <div class="layer-row">
+          <div>
+            <div class="layer-name">Vegetación · NDVI</div>
+            <div class="layer-description">Sentinel-2 · 8 sep. 2026 · 10 m</div>
+          </div>
+          <input id="ndvi-toggle" type="checkbox" aria-label="Mostrar u ocultar NDVI">
+        </div>
+        <div id="ndvi-legend" style="display:none; margin-top:12px;">
+          <div class="legend-title">Índice de vegetación (NDVI)</div>
+          <div class="layer-description" style="margin-bottom:8px;">Gradiente continuo · contraste realzado (percentiles 1–99)</div>
+          <div style="height:12px; border-radius:6px; background:linear-gradient(to right, #7f1d1d 0%, #f97316 25%, #facc15 50%, #65a30d 75%, #14532d 100%);"></div>
+          <div style="display:flex; justify-content:space-between; gap:8px; margin-top:5px; font-size:11px; color:var(--muted, #9ca3af);">
+            <span>NDVI bajo</span><span>NDVI alto</span>
+          </div>
+          <div class="layer-description" style="margin-top:7px;">Los colores indican el valor relativo del NDVI; la escala visual está realzada para distinguir mejor las diferencias.</div>
         </div>
       </div>
 
@@ -772,7 +2325,7 @@
           type="button"
           aria-pressed="false"
         >
-          Arquitectónica
+          3D urbana
         </button>
       </div>
 
@@ -817,6 +2370,154 @@
     <main class="map-area">
       <div id="map" aria-label="Mapa tridimensional de Benidorm"></div>
 
+      <button id="urban-stats-toggle" class="urban-stats-toggle"
+        type="button" aria-expanded="false" aria-controls="urban-stats-window">
+        Estadísticas urbanas
+      </button>
+
+      <section id="urban-stats-window" class="urban-stats-window"
+        role="dialog" aria-modal="false" aria-labelledby="urban-stats-title" hidden>
+        <div class="urban-stats-header">
+          <h2 id="urban-stats-title" class="urban-stats-title">Estadísticas urbanas</h2>
+          <button id="urban-stats-close" class="urban-stats-close"
+            type="button" aria-label="Cerrar estadísticas">Cerrar ✕</button>
+        </div>
+        <p class="urban-stats-subtitle">
+          Benidorm · Análisis de edificios y estructura urbana
+        </p>
+        <div id="urban-stats-content">
+          <div id="urban-building-stats">
+<div class="urban-chart-metrics">
+            <div class="urban-chart-metric">
+              <span class="urban-chart-label">Entidades con altura válida</span>
+              <strong id="urban-chart-total">—</strong>
+            </div>
+            <div class="urban-chart-metric">
+              <span class="urban-chart-label">Altura media estimada</span>
+              <strong id="urban-chart-mean">—</strong>
+            </div>
+          </div>
+          <h3 class="urban-chart-heading">Distribución por altura</h3>
+          <p class="urban-chart-note">Porcentaje sobre las entidades con altura superior a 0 m.</p>
+          <div id="urban-stats-chart" class="urban-stats-chart" aria-live="polite"></div>
+          <p class="urban-chart-footnote">
+            Se utilizan los atributos de altura disponibles o, si faltan, una estimación basada en el número de plantas.
+          </p>
+        
+      
+        </div>
+<div class="road-stats-section" aria-labelledby="road-stats-heading">
+          <div class="road-stats-divider"></div>
+          <h3 id="road-stats-heading" class="urban-chart-heading">Red viaria</h3>
+          <p class="urban-chart-note">Longitud estimada por categoría de vía.</p>
+
+          <div class="road-stats-metrics">
+            <div class="urban-chart-metric">
+              <span class="urban-chart-label">Tramos viarios</span>
+              <strong id="road-stats-count">—</strong>
+            </div>
+            <div class="urban-chart-metric">
+              <span class="urban-chart-label">Longitud total</span>
+              <strong id="road-stats-total">—</strong>
+            </div>
+          </div>
+
+          <div class="road-stats-visual">
+            <div id="road-stats-donut" class="road-stats-donut"
+                 role="img" aria-label="Distribución de la longitud de la red viaria">
+              <div class="road-stats-donut-center">
+                <strong id="road-stats-center">—</strong>
+                <span>kilómetros</span>
+              </div>
+            </div>
+          </div>
+          <div id="road-stats-legend" class="road-stats-legend"
+               aria-live="polite"></div>
+          <p class="urban-chart-footnote">
+            Longitudes aproximadas calculadas a partir de las geometrías del GeoJSON.
+            Los porcentajes representan la proporción de kilómetros de cada categoría.
+          </p>
+        </div>
+</div>
+
+        <div id="vegetation-stats-section" class="road-stats-section" aria-labelledby="vegetation-stats-heading" hidden>
+          <div class="road-stats-divider"></div>
+          <h3 id="vegetation-stats-heading" class="urban-chart-heading">Vegetación · NDVI</h3>
+          <p class="urban-chart-note">Sentinel-2 · 8 sep. 2026 · resolución original de 10 m.</p>
+          <div class="road-stats-metrics">
+            <div class="urban-chart-metric">
+              <span class="urban-chart-label">Píxeles válidos del recorte municipal</span>
+              <strong>384.909</strong>
+            </div>
+            <div class="urban-chart-metric">
+              <span class="urban-chart-label">Superficie equivalente aproximada</span>
+              <strong>38,49 km²</strong>
+            </div>
+            <div class="urban-chart-metric">
+              <span class="urban-chart-label">NDVI medio de la escena completa</span>
+              <strong>0,114</strong>
+            </div>
+            <div class="urban-chart-metric">
+              <span class="urban-chart-label">Rango NDVI de la escena completa</span>
+              <strong>−0,438 a 0,748</strong>
+            </div>
+          </div>
+          <h4 class="urban-chart-heading">Distribución del NDVI municipal</h4>
+          <p class="urban-chart-note">
+            Porcentaje de píxeles válidos por intervalo · Sentinel-2 · 8 sep. 2026.
+          </p>
+          <div id="ndvi-distribution-chart" class="ndvi-chart"
+               role="img"
+               aria-label="Distribución del NDVI municipal: negativo 0,70 por ciento; bajo 57,37 por ciento; moderado 38,81 por ciento; alto 3,03 por ciento; muy alto 0,09 por ciento.">
+            <div class="ndvi-chart-row">
+              <div class="ndvi-chart-label">
+                <span>Negativo (&lt; 0)</span>
+                <span class="ndvi-chart-value">0,70 %</span>
+              </div>
+              <div class="ndvi-chart-track"><div class="ndvi-chart-bar ndvi-chart-bar-0" style="width: 1.22%"></div></div>
+            </div>
+            <div class="ndvi-chart-row">
+              <div class="ndvi-chart-label">
+                <span>Bajo (0–0,2)</span>
+                <span class="ndvi-chart-value">57,37 %</span>
+              </div>
+              <div class="ndvi-chart-track"><div class="ndvi-chart-bar ndvi-chart-bar-1" style="width: 100%"></div></div>
+            </div>
+            <div class="ndvi-chart-row">
+              <div class="ndvi-chart-label">
+                <span>Moderado (0,2–0,4)</span>
+                <span class="ndvi-chart-value">38,81 %</span>
+              </div>
+              <div class="ndvi-chart-track"><div class="ndvi-chart-bar ndvi-chart-bar-2" style="width: 67.65%"></div></div>
+            </div>
+            <div class="ndvi-chart-row">
+              <div class="ndvi-chart-label">
+                <span>Alto (0,4–0,6)</span>
+                <span class="ndvi-chart-value">3,03 %</span>
+              </div>
+              <div class="ndvi-chart-track"><div class="ndvi-chart-bar ndvi-chart-bar-3" style="width: 5.28%"></div></div>
+            </div>
+            <div class="ndvi-chart-row">
+              <div class="ndvi-chart-label">
+                <span>Muy alto (0,6–1)</span>
+                <span class="ndvi-chart-value">0,09 %</span>
+              </div>
+              <div class="ndvi-chart-track"><div class="ndvi-chart-bar ndvi-chart-bar-4" style="width: 0.16%"></div></div>
+            </div>
+            <div class="ndvi-chart-scale">
+              <span>0 %</span>
+              <span>Escala relativa a la clase más frecuente</span>
+            </div>
+          </div>
+          <p class="urban-chart-footnote">
+            La superficie se estima a partir de los píxeles válidos del recorte municipal.
+            La media y el rango corresponden a la escena completa, no exclusivamente al municipio.
+            Un NDVI alto suele indicar vegetación más vigorosa; el resultado también depende
+            de la cobertura del suelo, el agua y las sombras.
+          </p>
+        </div>
+</section>
+
       <div id="map-status" class="map-status">
         Inicializando mapa...
       </div>
@@ -825,6 +2526,31 @@
 
   <script>
     "use strict";
+
+    const urbanStatsToggle = document.getElementById("urban-stats-toggle");
+    const urbanStatsWindow = document.getElementById("urban-stats-window");
+    const urbanStatsClose = document.getElementById("urban-stats-close");
+
+    function setUrbanStatsOpen(open) {
+      urbanStatsWindow.hidden = !open;
+      urbanStatsToggle.setAttribute("aria-expanded", String(open));
+    }
+
+    urbanStatsToggle.addEventListener("click", () => {
+      setUrbanStatsOpen(urbanStatsWindow.hidden);
+    });
+
+    urbanStatsClose.addEventListener("click", () => {
+      setUrbanStatsOpen(false);
+      urbanStatsToggle.focus();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && !urbanStatsWindow.hidden) {
+        setUrbanStatsOpen(false);
+        urbanStatsToggle.focus();
+      }
+    });
 
     const DATA_URL = "./benidorm_buildings.geojson";
 
@@ -848,6 +2574,9 @@
       filterMessage: document.getElementById("filter-message"),
       buildingsToggle: document.getElementById("buildings-toggle"),
       basemapSelect: document.getElementById("basemap-select"),
+      ndviToggle: document.getElementById("ndvi-toggle"),
+      lisaToggle: document.getElementById("lisa-toggle"),
+      roadsToggle: document.getElementById("roads-toggle"),
       terrainToggle: document.getElementById("terrain-toggle"),
       thermalMode: document.getElementById("thermal-mode"),
       architecturalMode: document.getElementById("architectural-mode"),
@@ -911,6 +2640,217 @@
         source: "pnoa-ortho",
         layout: { visibility: "none" },
         paint: { "raster-opacity": 1 }
+      });
+
+      map.addSource("benidorm-roads", {
+        type: "geojson",
+        data: "./benidorm_red_viaria.geojson",
+        lineMetrics: false
+      });
+
+      map.addLayer({
+        id: "benidorm-roads-layer",
+        type: "line",
+        source: "benidorm-roads",
+        layout: {
+          visibility: "none",
+          "line-cap": "round",
+          "line-join": "round"
+        },
+        paint: {
+          "line-color": [
+            "match",
+            ["get", "clased"],
+            "Autopista libre / autovía", "#f97316",
+            "Autopista de peaje", "#f97316",
+            "Carretera convencional", "#facc15",
+            "Carretera multicarril", "#facc15",
+            "Urbano", "#e5e7eb",
+            "Camino", "#94a3b8",
+            "Senda", "#94a3b8",
+            "Diseminado", "#94a3b8",
+            "#cbd5e1"
+          ],
+          "line-width": [
+            "interpolate", ["linear"], ["zoom"],
+            10, [
+              "match", ["get", "clased"],
+              "Autopista libre / autovía", 1.2,
+              "Autopista de peaje", 1.2,
+              "Carretera convencional", 0.9,
+              "Carretera multicarril", 1.0,
+              "Urbano", 0.45,
+              0.3
+            ],
+            16, [
+              "match", ["get", "clased"],
+              "Autopista libre / autovía", 4.0,
+              "Autopista de peaje", 4.0,
+              "Carretera convencional", 3.0,
+              "Carretera multicarril", 3.2,
+              "Urbano", 1.4,
+              0.8
+            ]
+          ],
+          "line-opacity": 0.9
+        }
+      });
+
+      elements.roadsToggle.addEventListener("change", () => {
+        const enabled = elements.roadsToggle.checked;
+        map.setLayoutProperty(
+          "benidorm-roads-layer",
+          "visibility",
+          enabled ? "visible" : "none"
+        );
+        document.getElementById("roads-legend").style.display =
+          enabled ? "block" : "none";
+        setStatus(enabled ? "Red viaria activada" : "Red viaria desactivada");
+      });
+
+      const roadCategoryFilters = [
+        {
+          id: "roads-filter-motorways",
+          classes: ["Autopista libre / autovía", "Autopista de peaje"]
+        },
+        {
+          id: "roads-filter-main",
+          classes: ["Carretera convencional", "Carretera multicarril"]
+        },
+        {
+          id: "roads-filter-urban",
+          classes: ["Urbano"]
+        },
+        {
+          id: "roads-filter-paths",
+          classes: ["Camino", "Senda", "Diseminado"]
+        }
+      ];
+
+      function updateRoadCategoryFilter() {
+        const selectedClasses = roadCategoryFilters
+          .filter(category => document.getElementById(category.id).checked)
+          .flatMap(category => category.classes);
+
+        if (selectedClasses.length === 0) {
+          map.setFilter("benidorm-roads-layer", [
+            "==", ["get", "clased"], "__ninguna__"
+          ]);
+        } else {
+          map.setFilter("benidorm-roads-layer", [
+            "in", ["get", "clased"], ["literal", selectedClasses]
+          ]);
+        }
+
+        setStatus(
+          selectedClasses.length
+            ? "Filtros de red viaria actualizados"
+            : "Todas las categorías de vías ocultas"
+        );
+      }
+
+      roadCategoryFilters.forEach(category => {
+        document.getElementById(category.id).addEventListener(
+          "change",
+          updateRoadCategoryFilter
+        );
+      });
+
+      map.addSource("ndvi-image", {
+        type: "image",
+        url: "./benidorm_ndvi_municipal_4326.png",
+        coordinates: [
+          [-0.19102700697393277, 38.6101489538608],
+          [-0.06374947373074191, 38.6101489538608],
+          [-0.06374947373074191, 38.49953871663755],
+          [-0.19102700697393277, 38.49953871663755]
+        ]
+      });
+
+      map.addLayer({
+        id: "ndvi-layer",
+        type: "raster",
+        source: "ndvi-image",
+        layout: { visibility: "none" },
+        paint: { "raster-opacity": 0.86 }
+      });
+
+      map.addSource("benidorm-lisa-grid", {
+        type: "geojson",
+        data: "./benidorm_lisa_grid.geojson"
+      });
+
+      map.addLayer({
+        id: "benidorm-lisa-grid-layer",
+        type: "fill",
+        source: "benidorm-lisa-grid",
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": [
+            "match",
+            ["get", "lisa_cluster"],
+            "HH", "#dc2626",
+            "LL", "#2563eb",
+            "HL", "#f59e0b",
+            "LH", "#06b6d4",
+            "#94a3b8"
+          ],
+          "fill-opacity": 0.25,
+          "fill-outline-color": "#e2e8f0"
+        }
+      });
+
+      elements.ndviToggle.addEventListener("change", () => {
+        const enabled = elements.ndviToggle.checked;
+        map.setLayoutProperty(
+          "ndvi-layer",
+          "visibility",
+          enabled ? "visible" : "none"
+        );
+        document.getElementById("ndvi-legend").style.display =
+          enabled ? "block" : "none";
+        setStatus(enabled ? "Capa NDVI activada" : "Capa NDVI desactivada");
+      });
+
+      const LISA_MIN_ZOOM = 13;
+
+      function updateLISAZoomVisibility() {
+        const enabled =
+          elements.lisaToggle.checked &&
+          map.getZoom() >= LISA_MIN_ZOOM;
+
+        map.setLayoutProperty(
+          "benidorm-lisa-grid-layer",
+          "visibility",
+          enabled ? "visible" : "none"
+        );
+
+        document.getElementById("lisa-legend").style.display =
+          enabled ? "block" : "none";
+      }
+
+      map.on("zoomend", updateLISAZoomVisibility);
+
+      elements.lisaToggle.addEventListener("change", () => {
+        const enabled = elements.lisaToggle.checked;
+        map.setLayoutProperty(
+          "benidorm-lisa-grid-layer",
+          "visibility",
+          enabled ? "visible" : "none"
+        );
+        document.getElementById("lisa-legend").style.display =
+          enabled ? "block" : "none";
+        updateLISAZoomVisibility();
+
+        setStatus(
+          enabled
+            ? (
+                map.getZoom() >= LISA_MIN_ZOOM
+                  ? "Clústeres espaciales LISA activados"
+                  : "Acércate para visualizar los clústeres LISA"
+              )
+            : "Clústeres espaciales LISA desactivados"
+        );
       });
 
       elements.basemapSelect.addEventListener("change", () => {
@@ -1100,7 +3040,7 @@
             ["to-number", ["get", "height_m"], 3]
           ],
           "fill-extrusion-base": 0,
-          "fill-extrusion-opacity": 0.92,
+          "fill-extrusion-opacity": 0.96,
           "fill-extrusion-vertical-gradient": true
         }
       });
@@ -1121,7 +3061,7 @@
         map.setPaintProperty(
           "benidorm-buildings-3d",
           "fill-extrusion-color",
-          thermal ? getThermalColorExpression() : "#648fb5"
+          thermal ? getThermalColorExpression() : "#477da8"
         );
       }
 
@@ -1143,8 +3083,422 @@
       setStatus(
         thermal
           ? "Visualización por altura estimada"
-          : "Visualización arquitectónica"
+          : "Visualización 3D urbana"
       );
+    }
+
+        function renderUrbanHeightChart(heights) {
+      const totalElement = document.getElementById("urban-chart-total");
+      const meanElement = document.getElementById("urban-chart-mean");
+      const chartElement = document.getElementById("urban-stats-chart");
+      if (!totalElement || !meanElement || !chartElement) return;
+
+      const bins = [
+        { label: "0–15 m", count: 0 },
+        { label: "15–30 m", count: 0 },
+        { label: "30–45 m", count: 0 },
+        { label: "45 m o más", count: 0 }
+      ];
+
+      for (const height of heights) {
+        if (height < 15) bins[0].count++;
+        else if (height < 30) bins[1].count++;
+        else if (height < 45) bins[2].count++;
+        else bins[3].count++;
+      }
+
+      const total = heights.length;
+      const mean = total
+        ? heights.reduce((sum, height) => sum + height, 0) / total
+        : NaN;
+
+      totalElement.textContent = formatNumber(total, 0);
+      meanElement.textContent = Number.isFinite(mean)
+        ? `${formatNumber(mean, 1)} m`
+        : "—";
+
+      chartElement.replaceChildren();
+
+      bins.forEach((bin, index) => {
+        const percentage = total ? bin.count / total * 100 : 0;
+        const row = document.createElement("div");
+        row.className = "urban-chart-row";
+
+        const header = document.createElement("div");
+        header.className = "urban-chart-row-head";
+
+        const label = document.createElement("span");
+        label.className = "urban-chart-range";
+        label.textContent = bin.label;
+
+        const value = document.createElement("span");
+        value.className = "urban-chart-value";
+        value.textContent = `${formatNumber(bin.count, 0)} · ${formatNumber(percentage, 1)} %`;
+
+        const track = document.createElement("div");
+        track.className = "urban-chart-track";
+        track.setAttribute("role", "img");
+        track.setAttribute("aria-label", `${bin.label}: ${formatNumber(bin.count, 0)} entidades, ${formatNumber(percentage, 1)} por ciento`);
+
+        const bar = document.createElement("div");
+        bar.className = `urban-chart-bar urban-chart-bar-${index}`;
+        bar.style.height = `${percentage}%`;
+
+        header.append(label, value);
+        track.appendChild(bar);
+        row.append(header, track);
+        chartElement.appendChild(row);
+      });
+    }
+
+
+        async function loadRoadStats() {
+          const countEl = document.getElementById("road-stats-count");
+          const totalEl = document.getElementById("road-stats-total");
+          const centerEl = document.getElementById("road-stats-center");
+          const donutEl = document.getElementById("road-stats-donut");
+          const legendEl = document.getElementById("road-stats-legend");
+
+          if (!countEl || !totalEl || !centerEl || !donutEl || !legendEl) return;
+
+          const number = value => value.toLocaleString("es-ES", {
+            maximumFractionDigits: 1
+          });
+
+          // Distancia aproximada sobre la superficie terrestre.
+          const distanceKm = (a, b) => {
+            const rad = Math.PI / 180;
+            const lat1 = a[1] * rad;
+            const lat2 = b[1] * rad;
+            const dLat = (b[1] - a[1]) * rad;
+            const dLon = (b[0] - a[0]) * rad;
+            const h = Math.sin(dLat / 2) ** 2
+              + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
+            return 6371.0088 * 2 * Math.atan2(
+              Math.sqrt(Math.max(0, h)),
+              Math.sqrt(Math.max(0, 1 - h))
+            );
+          };
+
+          const lineLength = coords => {
+            let length = 0;
+            if (!Array.isArray(coords)) return length;
+            for (let i = 1; i < coords.length; i++) {
+              const a = coords[i - 1];
+              const b = coords[i];
+              if (
+                Array.isArray(a) && Array.isArray(b) &&
+                Number.isFinite(a[0]) && Number.isFinite(a[1]) &&
+                Number.isFinite(b[0]) && Number.isFinite(b[1])
+              ) {
+                length += distanceKm(a, b);
+              }
+            }
+            return length;
+          };
+
+          const geometryLength = geometry => {
+            if (!geometry) return 0;
+            if (geometry.type === "LineString") {
+              return lineLength(geometry.coordinates);
+            }
+            if (geometry.type === "MultiLineString") {
+              return (geometry.coordinates || []).reduce(
+                (sum, line) => sum + lineLength(line), 0
+              );
+            }
+            return 0;
+          };
+
+          const palette = [
+            "#38bdf8", "#f97316", "#facc15", "#34d399",
+            "#a78bfa", "#fb7185", "#94a3b8", "#2dd4bf",
+            "#c084fc", "#e879f9", "#fda4af", "#64748b"
+          ];
+
+          try {
+            const response = await fetch("./benidorm_red_viaria.geojson");
+            if (!response.ok) {
+              throw new Error("HTTP " + response.status);
+            }
+
+            const data = await response.json();
+            const features = Array.isArray(data.features) ? data.features : [];
+            const totals = new Map();
+            let validSegments = 0;
+            let totalKm = 0;
+
+            for (const feature of features) {
+              const length = geometryLength(feature.geometry);
+              if (!(length > 0) || !Number.isFinite(length)) continue;
+
+              const props = feature.properties || {};
+              const category = String(props.clased || "Sin clasificar").trim()
+                || "Sin clasificar";
+
+              validSegments++;
+              totalKm += length;
+
+              const current = totals.get(category) || { km: 0, count: 0 };
+              current.km += length;
+              current.count++;
+              totals.set(category, current);
+            }
+
+            const rows = [...totals.entries()]
+              .map(([name, value]) => ({ name, ...value }))
+              .sort((a, b) => b.km - a.km);
+
+            countEl.textContent = number(validSegments);
+            totalEl.textContent = number(totalKm) + " km";
+            centerEl.textContent = number(totalKm);
+
+            let cumulative = 0;
+            const stops = [];
+            const colors = new Map();
+
+            rows.forEach((row, index) => {
+              const color = palette[index % palette.length];
+              colors.set(row.name, color);
+              const start = cumulative;
+              cumulative += totalKm > 0 ? row.km / totalKm * 100 : 0;
+              stops.push(`${color} ${start}% ${cumulative}%`);
+            });
+
+            donutEl.style.background = stops.length
+              ? `conic-gradient(${stops.join(", ")})`
+              : "#334155";
+
+            legendEl.replaceChildren();
+
+            for (const row of rows) {
+              const percent = totalKm > 0 ? row.km / totalKm * 100 : 0;
+              const item = document.createElement("div");
+              item.className = "road-stats-legend-row";
+
+              const swatch = document.createElement("span");
+              swatch.className = "road-stats-swatch";
+              swatch.style.background = colors.get(row.name);
+
+              const name = document.createElement("span");
+              name.className = "road-stats-legend-name";
+              name.textContent = row.name;
+
+              const value = document.createElement("span");
+              value.className = "road-stats-legend-value";
+              value.textContent = number(row.km) + " km";
+
+              const detail = document.createElement("small");
+              detail.textContent = number(percent) + "% · "
+                + number(row.count) + " tramos";
+              value.appendChild(detail);
+
+              item.append(swatch, name, value);
+              legendEl.appendChild(item);
+            }
+
+            if (!validSegments) {
+              legendEl.textContent = "No se han encontrado geometrías lineales válidas.";
+            }
+          } catch (error) {
+            console.error("No se pudieron calcular las estadísticas viarias:", error);
+            countEl.textContent = "—";
+            totalEl.textContent = "No disponible";
+            centerEl.textContent = "—";
+            legendEl.textContent =
+              "No se han podido cargar los datos viarios. Comprueba que el servidor local esté activo.";
+          }
+        }
+
+        loadRoadStats();
+
+        function syncUrbanStatsSections() {
+          const buildingsToggle = document.getElementById("buildings-toggle");
+          const roadsToggle = document.getElementById("roads-toggle");
+          const ndviToggle = document.getElementById("ndvi-toggle");
+          const buildingStats = document.getElementById("urban-building-stats");
+          const roadStats = document.querySelector(".road-stats-section:not(#vegetation-stats-section)");
+          const vegetationStats = document.getElementById("vegetation-stats-section");
+
+          if (!buildingsToggle || !roadsToggle || !ndviToggle ||
+              !buildingStats || !roadStats || !vegetationStats) {
+            return;
+          }
+
+          const roadCategoryIds = [
+            "roads-filter-motorways",
+            "roads-filter-main",
+            "roads-filter-urban",
+            "roads-filter-paths"
+          ];
+          const hasVisibleRoadCategories = roadCategoryIds.some(id => {
+            const checkbox = document.getElementById(id);
+            return checkbox && checkbox.checked;
+          });
+
+          buildingStats.hidden = !buildingsToggle.checked;
+          roadStats.hidden = !roadsToggle.checked || !hasVisibleRoadCategories;
+          vegetationStats.hidden = !ndviToggle.checked;
+        }
+
+        [
+          "buildings-toggle",
+          "roads-toggle",
+          "roads-filter-motorways",
+          "roads-filter-main",
+          "roads-filter-urban",
+          "roads-filter-paths",
+          "ndvi-toggle"
+        ].forEach(id => {
+          const control = document.getElementById(id);
+          if (control) {
+            control.addEventListener("change", syncUrbanStatsSections);
+          }
+        });
+        syncUrbanStatsSections();
+
+
+function updateUrbanDashboard(features) {
+      // Para los indicadores de altura, excluir entidades con altura
+      // y plantas sobre rasante iguales a cero.
+      const heights = features
+        .map(feature => getHeight(feature.properties))
+        .filter(height => Number.isFinite(height) && height > 0);
+
+      const bins = [0, 0, 0, 0];
+
+      for (const height of heights) {
+        if (height < 15) bins[0]++;
+        else if (height < 30) bins[1]++;
+        else if (height < 45) bins[2]++;
+        else bins[3]++;
+      }
+
+      renderUrbanHeightChart(heights);
+      const maxBin = Math.max(...bins, 1);
+
+      bins.forEach((count, index) => {
+        const countElement = document.getElementById(`height-count-${index}`);
+        const percentageElement = document.getElementById(`height-pct-${index}`);
+        const barElement = document.getElementById(`height-bar-${index}`);
+
+        if (countElement) countElement.textContent = formatNumber(count, 0);
+
+        const percentage = heights.length
+          ? count / heights.length * 100
+          : 0;
+
+        if (percentageElement) {
+          percentageElement.textContent = `${formatNumber(percentage, 1)} %`;
+        }
+
+        if (barElement) barElement.style.width = `${count / maxBin * 100}%`;
+      });
+
+      const thresholds = [
+        [30, "height-over-30"],
+        [45, "height-over-45"],
+        [60, "height-over-60"]
+      ];
+
+      thresholds.forEach(([threshold, id]) => {
+        const count = heights.filter(height => height > threshold).length;
+        const element = document.getElementById(id);
+        if (element) element.textContent = formatNumber(count, 0);
+      });
+
+      fetch("./benidorm_lisa_grid.geojson")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (!data || !Array.isArray(data.features)) {
+            throw new Error("GeoJSON LISA no válido");
+          }
+
+          const cells = data.features;
+          const clusters = { HH: 0, LL: 0, HL: 0, LH: 0 };
+          let significant = 0;
+
+          for (const feature of cells) {
+            const properties = feature.properties || {};
+            const cluster = String(properties.lisa_cluster || "").toUpperCase();
+
+            if (properties.significativo === true ||
+                properties.significativo === 1 ||
+                properties.significativo === "true") {
+              significant++;
+            }
+
+            if (Object.prototype.hasOwnProperty.call(clusters, cluster)) {
+              clusters[cluster]++;
+            }
+          }
+
+          const values = {
+            "lisa-total": cells.length,
+            "lisa-significant": significant,
+            "lisa-hh": clusters.HH,
+            "lisa-ll": clusters.LL,
+            "lisa-hl": clusters.HL,
+            "lisa-lh": clusters.LH,
+            "lisa-ns": cells.length -
+              clusters.HH - clusters.LL - clusters.HL - clusters.LH
+          };
+
+          Object.entries(values).forEach(([id, value]) => {
+            const element = document.getElementById(id);
+            if (element) element.textContent = formatNumber(value, 0);
+          });
+
+          const percentage = cells.length
+            ? significant / cells.length * 100
+            : 0;
+          const percentageElement =
+            document.getElementById("lisa-significant-pct");
+
+          if (percentageElement) {
+            percentageElement.textContent =
+              `${formatNumber(percentage, 1)} %`;
+          }
+
+          const methodValues = {
+            "lisa-method-total": cells.length,
+            "lisa-method-significant": significant,
+            "lisa-method-hh": clusters.HH,
+            "lisa-method-ll": clusters.LL
+          };
+
+          Object.entries(methodValues).forEach(([id, value]) => {
+            const element = document.getElementById(id);
+            if (element) element.textContent = formatNumber(value, 0);
+          });
+
+          const methodPercentage = document.getElementById("lisa-method-pct");
+          if (methodPercentage) {
+            methodPercentage.textContent = `(${formatNumber(percentage, 1)} %)`;
+          }
+
+          const methodExtra = document.getElementById("lisa-method-extra");
+          if (methodExtra) {
+            methodExtra.textContent =
+              `HL: ${formatNumber(clusters.HL, 0)} · ` +
+              `LH: ${formatNumber(clusters.LH, 0)} · ` +
+              `No significativas: ${formatNumber(values["lisa-ns"], 0)}`;
+          }
+        })
+        .catch(error => {
+          console.error("No se pudieron calcular los indicadores LISA:", error);
+          ["lisa-total", "lisa-significant", "lisa-hh", "lisa-ll",
+           "lisa-hl", "lisa-lh", "lisa-ns", "lisa-significant-pct"]
+            .forEach(id => {
+              const element = document.getElementById(id);
+              if (element) element.textContent = "N/D";
+            });
+        });
     }
 
     function updateStatistics() {
@@ -1162,6 +3516,30 @@
         ? values.reduce((sum, value) => sum + value, 0) / values.length
         : 0;
 
+      const positiveHeights = heights
+        .filter(height => height > 0)
+        .sort((a, b) => a - b);
+
+      const middle = Math.floor(positiveHeights.length / 2);
+      const median = positiveHeights.length === 0
+        ? null
+        : positiveHeights.length % 2 === 0
+          ? (positiveHeights[middle - 1] + positiveHeights[middle]) / 2
+          : positiveHeights[middle];
+
+      const medianElement = document.getElementById("stat-height-median");
+      if (medianElement) {
+        medianElement.textContent = median === null
+          ? "N/D"
+          : formatNumber(median);
+      }
+
+      const sampleElement = document.getElementById("stat-height-sample");
+      if (sampleElement) {
+        sampleElement.textContent =
+          `Muestra: ${formatNumber(positiveHeights.length, 0)} entidades`;
+      }
+
       elements.statCount.textContent =
         formatNumber(features.length, 0);
 
@@ -1169,7 +3547,9 @@
         formatNumber(mean(floors));
 
       elements.statHeight.textContent =
-        formatNumber(mean(heights));
+        formatNumber(mean(positiveHeights));
+
+      updateUrbanDashboard(features);
 
       updateVisibleCount();
     }
@@ -1257,19 +3637,26 @@
 
       return `
         <div class="popup-content">
-          <div class="popup-eyebrow">CATASTRO INSPIRE</div>
+          <div class="popup-eyebrow">EDIFICIO · CATASTRO INSPIRE</div>
 
           <h3 class="popup-title">Ficha del edificio</h3>
 
           <div class="popup-highlight">
             <div class="popup-highlight-label">
-              ALTURA ESTIMADA
+              <span>ALTURA ESTIMADA</span>
               <span class="popup-estimate-badge">ESTIMACIÓN</span>
             </div>
 
             <div class="popup-highlight-value">
               ${escapeHTML(formatNumber(height))} m
             </div>
+            <div style="margin-top:5px;color:#94a3b8;font-size:11px;">
+              ${escapeHTML(formatText(floors))} plantas sobre rasante
+            </div>
+          </div>
+
+          <div style="margin:16px 0 8px;color:#93c5fd;font-size:10px;font-weight:700;letter-spacing:1.1px;">
+            CARACTERÍSTICAS CONSTRUCTIVAS
           </div>
 
           <div class="popup-grid">
@@ -1319,10 +3706,17 @@
               </div>
             </div>
 
-            <div class="popup-field">
-              <div class="popup-field-label">
-                localId
-              </div>
+            </div>
+
+            <div style="margin:16px 0 8px;color:#93c5fd;font-size:10px;font-weight:700;letter-spacing:1.1px;">
+              IDENTIFICACIÓN DE LA ENTIDAD
+            </div>
+
+            <div class="popup-grid">
+              <div class="popup-field">
+                <div class="popup-field-label">
+                  Identificador local
+                </div>
               <div class="popup-field-value">
                 ${escapeHTML(formatText(localId))}
               </div>
@@ -1330,12 +3724,16 @@
 
             <div class="popup-field" style="grid-column:1 / -1">
               <div class="popup-field-label">
-                gml_id
+                Identificador GML
               </div>
               <div class="popup-field-value">
                 ${escapeHTML(formatText(gmlId))}
               </div>
             </div>
+          </div>
+
+          <div style="margin:16px 0 8px;color:#93c5fd;font-size:10px;font-weight:700;letter-spacing:1.1px;">
+            NOTA METODOLÓGICA
           </div>
 
           <div class="popup-note">
@@ -1645,7 +4043,7 @@
       map.setLight({
         anchor: "viewport",
         color: "#ffffff",
-        intensity: 0.55,
+        intensity: 0.75,
         position: [1.15, 210, 35]
       });
 
@@ -1713,7 +4111,7 @@
           }
 
           if (feature) {
-            showBuilding(feature, false);
+            showBuilding(feature, true);
           }
         });
 
@@ -1722,6 +4120,234 @@
         });
 
         map.on("mouseleave", "benidorm-buildings-3d", () => {
+          map.getCanvas().style.cursor = "";
+        });
+
+        map.on("click", "benidorm-roads-layer", event => {
+          if (!event.features || !event.features.length) {
+            return;
+          }
+
+          const feature = event.features[0];
+          const properties = feature.properties || {};
+
+          const getRoadValue = (keys) => {
+            for (const key of keys) {
+              const value = properties[key];
+              if (
+                value !== undefined &&
+                value !== null &&
+                String(value).trim() !== ""
+              ) {
+                return value;
+              }
+            }
+            return null;
+          };
+
+          const escapeRoadHTML = value =>
+            String(value)
+              .replace(/&/g, "&amp;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;")
+              .replace(/"/g, "&quot;")
+              .replace(/'/g, "&#39;");
+
+          const roadName = getRoadValue(["nombre", "nombre_alt"]);
+          const roadClass = getRoadValue(["clased"]);
+          const roadType = getRoadValue(["tipo_viald"]);
+          const lanes = getRoadValue(["ncarriles"]);
+          const direction = getRoadValue(["sentidod"]);
+          const roadId = getRoadValue(["id_tramo"]);
+          const access = getRoadValue(["accesod"]);
+          const surface = getRoadValue(["firmed"]);
+
+          const field = (label, value) => value
+            ? `<div class="popup-field">
+                 <div class="popup-field-label">${label}</div>
+                 <div class="popup-field-value">${escapeRoadHTML(value)}</div>
+               </div>`
+            : "";
+
+          const popupHTML = `
+            <div class="popup-content">
+              <div class="popup-eyebrow">INFRAESTRUCTURA · IGN/CNIG</div>
+
+              <h3 class="popup-title" style="overflow-wrap:anywhere;">
+                ${escapeRoadHTML(roadName || "Tramo de vía sin nombre")}
+              </h3>
+
+              <div style="margin:-5px 0 14px;color:#94a3b8;font-size:11px;">
+                RED VIARIA DE BENIDORM
+              </div>
+
+              <div class="popup-highlight">
+                <div class="popup-highlight-label">CLASIFICACIÓN DE LA VÍA</div>
+                <div class="popup-highlight-value" style="font-size:18px;line-height:1.4;">
+                  ${escapeRoadHTML(roadClass || "No disponible")}
+                </div>
+                ${roadType ? `<div style="margin-top:5px;color:#cbd5e1;font-size:12px;">${escapeRoadHTML(roadType)}</div>` : ""}
+              </div>
+
+              <div style="margin:16px 0 8px;color:#93c5fd;font-size:10px;font-weight:700;letter-spacing:1.1px;">
+                CIRCULACIÓN Y ACCESO
+              </div>
+
+              <div class="popup-grid">
+                ${field("Número de carriles", lanes)}
+                ${field("Sentido de circulación", direction)}
+                ${field("Acceso", access)}
+                ${field("Tipo de firme", surface)}
+              </div>
+
+              ${roadId ? `
+                <div style="margin:16px 0 8px;color:#93c5fd;font-size:10px;font-weight:700;letter-spacing:1.1px;">
+                  IDENTIFICACIÓN DEL TRAMO
+                </div>
+                <div class="popup-field">
+                  <div class="popup-field-label">Identificador del tramo</div>
+                  <div class="popup-field-value" style="overflow-wrap:anywhere;">
+                    ${escapeRoadHTML(roadId)}
+                  </div>
+                </div>
+              ` : ""}
+
+              <div class="popup-note" style="margin-top:14px;">
+                <strong>Fuente cartográfica.</strong> Red de Transporte de España · IGN/CNIG.
+                Los datos mostrados dependen de los atributos disponibles para este tramo.
+              </div>
+            </div>`;
+
+          if (state.popup) {
+            state.popup.remove();
+          }
+
+          state.popup = new maplibregl.Popup({
+            closeButton: true,
+            closeOnClick: false,
+            maxWidth: "340px",
+            offset: 10
+          })
+            .setLngLat(event.lngLat)
+            .setHTML(popupHTML)
+            .addTo(map);
+
+          setStatus("Tramo de carretera seleccionado");
+        });
+
+        map.on("mouseenter", "benidorm-roads-layer", () => {
+          map.getCanvas().style.cursor = "pointer";
+        });
+
+        map.on("mouseleave", "benidorm-roads-layer", () => {
+          map.getCanvas().style.cursor = "";
+        });
+
+
+        map.on("click", "benidorm-lisa-grid-layer", event => {
+          const feature = event.features && event.features[0];
+          if (!feature) return;
+
+          const props = feature.properties || {};
+          const cluster = String(props.lisa_cluster || "");
+          const categories = {
+            HH: "Alto-alto · clúster de alta concentración",
+            LL: "Bajo-bajo · clúster de baja concentración",
+            HL: "Alto-bajo · valor alto rodeado de bajos",
+            LH: "Bajo-alto · valor bajo rodeado de altos"
+          };
+
+          const number = value => {
+            const parsed = Number(value);
+            return Number.isFinite(parsed) ? parsed : null;
+          };
+          const fmt = (value, decimals = 3) => {
+            const parsed = number(value);
+            return parsed === null ? "No disponible" : parsed.toFixed(decimals);
+          };
+
+          const significant =
+            props.significativo === true ||
+            props.significativo === "true";
+
+          const clusterLabel = significant
+            ? (categories[cluster] || "Asociación local significativa")
+            : "Sin asociación local significativa";
+
+          const clusterStyles = {
+            HH: { color: "#fca5a5", background: "rgba(220,38,38,.16)", border: "#dc2626" },
+            LL: { color: "#93c5fd", background: "rgba(37,99,235,.16)", border: "#2563eb" },
+            HL: { color: "#fcd34d", background: "rgba(245,158,11,.16)", border: "#f59e0b" },
+            LH: { color: "#67e8f9", background: "rgba(6,182,212,.16)", border: "#06b6d4" }
+          };
+          const style = significant && clusterStyles[cluster]
+            ? clusterStyles[cluster]
+            : { color: "#cbd5e1", background: "rgba(148,163,184,.12)", border: "#64748b" };
+
+          const interpretations = {
+            HH: "Esta celda tiene una concentración de edificios relativamente alta y está rodeada de celdas con valores también altos.",
+            LL: "Esta celda tiene una concentración de edificios relativamente baja y está rodeada de celdas con valores también bajos.",
+            HL: "Esta celda presenta un valor alto respecto a su entorno, donde predominan valores bajos.",
+            LH: "Esta celda presenta un valor bajo respecto a su entorno, donde predominan valores altos."
+          };
+          const interpretation = significant
+            ? (interpretations[cluster] || "Se detecta una asociación espacial local estadísticamente significativa.")
+            : "Con el umbral aplicado y la corrección FDR, no hay evidencia estadística suficiente para clasificar esta celda como asociación local significativa.";
+
+          const popupHTML = `
+            <div class="lisa-popup" style="padding:16px;color:#e5e7eb;font-size:12px;line-height:1.55;">
+              <div style="font-size:9px;font-weight:800;letter-spacing:1.2px;color:#94a3b8;margin-bottom:5px;">
+                ANÁLISIS ESPACIAL · LISA
+              </div>
+              <div style="font-weight:750;font-size:15px;margin:0 24px 10px 0;">
+                Celda de 250 m
+              </div>
+              <div style="padding:9px 10px;margin-bottom:12px;border-radius:7px;background:${style.background};border:1px solid ${style.border};">
+                <div style="font-weight:750;color:${style.color};">${escapeHTML(clusterLabel)}</div>
+                <div style="margin-top:5px;">${escapeHTML(interpretation)}</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:11px;">
+                <div style="padding:8px;border-radius:6px;background:rgba(148,163,184,.10);">
+                  <div style="font-size:10px;color:#94a3b8;">N.º de edificios</div>
+                  <div style="font-size:19px;font-weight:800;">${escapeHTML(props.n_edificios ?? "—")}</div>
+                </div>
+                <div style="padding:8px;border-radius:6px;background:rgba(148,163,184,.10);">
+                  <div style="font-size:10px;color:#94a3b8;">ID de celda</div>
+                  <div style="font-size:19px;font-weight:800;">${escapeHTML(props.cell_id ?? "—")}</div>
+                </div>
+              </div>
+              <div style="border-top:1px solid rgba(148,163,184,.22);padding-top:9px;">
+                <div><strong>Moran local (I):</strong> ${fmt(props.lisa_i)}</div>
+                <div><strong>p de permutación:</strong> ${fmt(props.p_sim)}</div>
+                <div><strong>p ajustado FDR:</strong> ${fmt(props.p_fdr)}</div>
+              </div>
+              <div style="margin-top:10px;font-size:10px;color:#94a3b8;">
+                ${significant ? "Significativa tras corrección FDR (umbral del 5 %)." : "No significativa tras corrección FDR (umbral del 5 %)."}
+                Los patrones espaciales describen asociaciones, no causalidad.
+              </div>
+            </div>
+          `;
+
+          if (state.popup) state.popup.remove();
+
+          state.popup = new maplibregl.Popup({
+            closeButton: true,
+            closeOnClick: false,
+            maxWidth: "340px",
+            offset: 10
+          })
+            .setLngLat(event.lngLat)
+            .setHTML(popupHTML)
+            .addTo(map);
+
+          setStatus("Celda LISA seleccionada");
+        });
+
+        map.on("mouseenter", "benidorm-lisa-grid-layer", () => {
+          map.getCanvas().style.cursor = "pointer";
+        });
+
+        map.on("mouseleave", "benidorm-lisa-grid-layer", () => {
           map.getCanvas().style.cursor = "";
         });
 
